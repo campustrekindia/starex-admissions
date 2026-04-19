@@ -8,24 +8,36 @@
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  EMAIL SETUP — EmailJS (free, no backend required)          ║
-     ║  1. Go to https://www.emailjs.com and create a free account ║
-     ║  2. Add an Email Service (Gmail recommended)                ║
-     ║  3. Create an Email Template with variables:                ║
-     ║       {{to_email}}  {{to_name}}  {{program}}                ║
-     ║       {{ref_no}}    {{phone}}    {{state}}                  ║
-     ║  4. Replace the three placeholders below:                   ║
-     ║       YOUR_PUBLIC_KEY   → Account → General → Public Key    ║
-     ║       YOUR_SERVICE_ID   → Email Services → Service ID       ║
-     ║       YOUR_TEMPLATE_ID  → Email Templates → Template ID     ║
+     ║                                                              ║
+     ║  You need TWO templates:                                     ║
+     ║                                                              ║
+     ║  TEMPLATE 1 — Admin Notification (existing)                  ║
+     ║    Variables: {{name}} {{email}} {{title}} {{time}}          ║
+     ║               {{message}}                                    ║
+     ║    To Email:  your admissions inbox                          ║
+     ║                                                              ║
+     ║  TEMPLATE 2 — Applicant Confirmation (NEW — create this)     ║
+     ║    To Email:  {{applicant_email}}                            ║
+     ║    From Name: Starex University Admissions                   ║
+     ║    Subject:   Application Received — {{program}}             ║
+     ║    Body example:                                             ║
+     ║      Dear {{applicant_name}},                                ║
+     ║      Thank you for applying to Starex University!            ║
+     ║      Reference No: {{ref_no}}                                ║
+     ║      Program: {{program}}                                    ║
+     ║      Our team will contact you within 24–48 hours.           ║
+     ║      — Starex University Admissions Team                     ║
+     ║                                                              ║
+     ║  Then fill in the constants below:                           ║
      ╚══════════════════════════════════════════════════════════════╝ -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  /* ── REPLACE THESE THREE VALUES ── */
-
-  const EMAILJS_PUBLIC_KEY   = 'xapplWuTGhv3NaAHB';
-  const EMAILJS_SERVICE_ID   = 'service_vo1sug9';
-  const EMAILJS_TEMPLATE_ID  = 'template_osokv09';
-  /* ────────────────────────────── */
+  /* ── YOUR EMAILJS CREDENTIALS ── */
+  const EMAILJS_PUBLIC_KEY          = 'xapplWuTGhv3NaAHB';   // Account → General → Public Key
+  const EMAILJS_SERVICE_ID          = 'service_vo1sug9';      // Email Services → Service ID
+  const EMAILJS_TEMPLATE_ADMIN      = 'template_osokv09';     // Admin notification template
+  const EMAILJS_TEMPLATE_APPLICANT  = 'template_98l8jsc';
+  /* ────────────────────────────────────────────────────── */
 
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 </script>
@@ -46,7 +58,6 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:0 2.5rem;height:66px;box-shadow:0 2px 24px rgba(0,0,0,.45)
 }
-/* Logo only — no brand text */
 .nav-brand{display:flex;align-items:center;text-decoration:none}
 .nav-brand img{height:44px;width:auto;object-fit:contain}
 .nav-links{display:flex;align-items:center;gap:1.8rem;list-style:none}
@@ -190,25 +201,18 @@ nav{
 .btn-form.secondary{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.13)}
 .btn-form.secondary:hover{background:rgba(255,255,255,.14)}
 
-/* email sending status */
-.email-status{
-  margin-top:.6rem;padding:.5rem .75rem;border-radius:6px;
-  font-size:.68rem;font-weight:600;letter-spacing:.04em;text-align:center;
-  display:none
-}
-.email-status.sending{display:block;background:rgba(201,146,42,.12);border:1px solid rgba(201,146,42,.3);color:var(--gold2)}
-.email-status.sent{display:block;background:rgba(26,92,58,.15);border:1px solid rgba(26,92,58,.4);color:#4ade80}
-.email-status.error{display:block;background:rgba(139,26,26,.15);border:1px solid rgba(139,26,26,.4);color:#f87171}
-
 .form-success{display:none;text-align:center;padding:1rem 0}
 .form-success.show{display:block;animation:fadeUp .4s ease}
 .success-icon{font-size:2.8rem;margin-bottom:.7rem;display:block}
 .form-success h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:.45rem}
 .form-success p{font-size:.77rem;color:rgba(255,255,255,.55);line-height:1.65}
 .form-success .ref{display:inline-block;margin-top:.85rem;background:rgba(201,146,42,.14);border:1px solid rgba(201,146,42,.33);border-radius:6px;padding:.33rem .88rem;font-size:.72rem;font-weight:700;color:var(--gold2);letter-spacing:.1em}
-.email-note{font-size:.66rem;color:rgba(255,255,255,.35);margin-top:.6rem;line-height:1.6}
+.email-note{font-size:.68rem;margin-top:.75rem;line-height:1.65;padding:.5rem .75rem;border-radius:6px}
+.email-note.ok{background:rgba(26,92,58,.18);border:1px solid rgba(26,92,58,.4);color:#4ade80}
+.email-note.warn{background:rgba(201,146,42,.12);border:1px solid rgba(201,146,42,.3);color:var(--gold2)}
+.email-note.err{background:rgba(139,26,26,.15);border:1px solid rgba(139,26,26,.4);color:#f87171}
 
-/* ── INFO BAND — motto + tags only, contacts removed ── */
+/* ── INFO BAND ── */
 .info-band{
   padding:2.2rem 2.5rem 3.5rem;
   display:flex;flex-direction:column;align-items:center;
@@ -301,7 +305,7 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
 </head>
 <body>
 
-<!-- NAVBAR — logo icon only, no name text -->
+<!-- NAVBAR -->
 <nav>
   <a href="#home" class="nav-brand">
     <img src="seulogo.png" alt="Starex University"/>
@@ -475,7 +479,6 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
           <button class="btn-form secondary" onclick="prevStep(3)">← Edit</button>
           <button class="btn-form primary" id="submitBtn" onclick="submitForm()">Submit Application ✓</button>
         </div>
-        <div class="email-status" id="emailStatus"></div>
       </div>
 
       <!-- Success -->
@@ -489,7 +492,7 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
     </div>
   </div>
 
-  <!-- INFO BAND — motto + tags only, contacts removed (now in footer) -->
+  <!-- INFO BAND -->
   <div class="info-band">
     <p class="info-motto">Nunc Est Semper · Now is Forever &nbsp;|&nbsp; UGC Approved · Gurugram, Haryana, India</p>
     <div class="info-tags">
@@ -556,7 +559,7 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
   <a href="#apply" class="btn-cta">Apply for Admission →</a>
 </section>
 
-<!-- FOOTER — full contact details live here -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -647,19 +650,28 @@ function populateReview(){
   document.getElementById('rv_state').textContent   = document.getElementById('f_state').value;
 }
 
-/* ╔══════════════════════════════════════════════════════════╗
-   ║  FORMSPREE endpoint — stores every submission           ║
-   ║  View all entries at https://formspree.io/forms         ║
-   ╚══════════════════════════════════════════════════════════╝ */
+/* ── Formspree endpoint ── */
 const FORMSPREE_URL = 'https://formspree.io/f/xnjldypb';
 
-/* ── Form submission: Formspree (data) + EmailJS (notification) ── */
+/* ── setNote helper ── */
+function setNote(msg, type){
+  const el = document.getElementById('emailConfirmNote');
+  el.textContent = msg;
+  el.className = 'email-note ' + type;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FORM SUBMISSION
+   Flow:
+     1. POST to Formspree (stores the lead)
+     2. EmailJS → admin notification  (EMAILJS_TEMPLATE_ADMIN)
+     3. EmailJS → applicant confirmation (EMAILJS_TEMPLATE_APPLICANT)
+   ══════════════════════════════════════════════════════════════════ */
 async function submitForm(){
   const btn     = document.getElementById('submitBtn');
   const refCode = 'SU-' + new Date().getFullYear() + '-' + (Math.floor(Math.random()*90000)+10000);
   const now     = new Date();
 
-  /* Collect all field values once */
   const fields = {
     reference_number : refCode,
     full_name        : document.getElementById('f_name').value.trim(),
@@ -673,11 +685,10 @@ async function submitForm(){
     submitted_at     : now.toLocaleString('en-IN', { dateStyle:'long', timeStyle:'short' })
   };
 
-  /* Disable button to prevent double-submit */
   btn.disabled = true;
   btn.textContent = 'Submitting…';
 
-  /* ── 1. FORMSPREE — store the submission ── */
+  /* ── 1. FORMSPREE ── */
   try {
     const res = await fetch(FORMSPREE_URL, {
       method  : 'POST',
@@ -689,51 +700,79 @@ async function submitForm(){
     console.error('Formspree error:', err);
   }
 
-  /* ── 2. Show success screen ── */
+  /* ── 2. Show success screen immediately ── */
   document.getElementById('stepProgress').style.display = 'none';
   document.querySelectorAll('.form-step').forEach(s=>s.style.display='none');
   document.getElementById('formSuccess').classList.add('show');
   document.getElementById('refNo').textContent = 'Reference No: ' + refCode;
+  setNote('Sending confirmation email…', 'warn');
 
-  /* ── 3. EMAILJS — send notification email ── */
-  /* Variable names match the EmailJS template:
-     {{name}}    → applicant full name  (From Name field)
-     {{email}}   → applicant email      (Reply To field)
-     {{title}}   → subject line suffix
-     {{time}}    → submission timestamp
-     {{message}} → full formatted details block              */
-  if(EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'xapplWuTGhv3NaAHB'){
-    const emailPayload = {
-      name    : fields.full_name,
-      email   : fields.email,
-      title   : fields.program + ' — Admission Application',
-      time    : fields.submitted_at,
-      message :
-        '📋 Admission Application Details\n\n' +
-        'Reference No : ' + refCode              + '\n' +
-        'Full Name    : ' + fields.full_name     + '\n' +
-        'Mobile       : ' + fields.mobile        + '\n' +
-        'Email        : ' + fields.email         + '\n' +
-        'Gender       : ' + fields.gender        + '\n' +
-        'Program      : ' + fields.program       + '\n' +
-        '12th Year    : ' + fields.pass_year     + '\n' +
-        'State        : ' + fields.state         + '\n' +
-        'Source       : ' + fields.source        + '\n\n' +
-        'Please contact the applicant within 24–48 hours.\n' +
-        'Starex University Admissions — 2026–27'
-    };
-    try{
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailPayload);
-      document.getElementById('emailConfirmNote').textContent =
-        '✅ A confirmation has been sent to ' + fields.email;
+  /* ── 3. EmailJS — Admin notification ──
+     Template variables used: {{name}} {{email}} {{title}} {{time}} {{message}} */
+  const adminPayload = {
+    name    : fields.full_name,
+    email   : fields.email,
+    title   : fields.program + ' — Admission Application',
+    time    : fields.submitted_at,
+    message :
+      '📋 Admission Application Details\n\n' +
+      'Reference No : ' + refCode              + '\n' +
+      'Full Name    : ' + fields.full_name     + '\n' +
+      'Mobile       : ' + fields.mobile        + '\n' +
+      'Email        : ' + fields.email         + '\n' +
+      'Gender       : ' + fields.gender        + '\n' +
+      'Program      : ' + fields.program       + '\n' +
+      '12th Year    : ' + fields.pass_year     + '\n' +
+      'State        : ' + fields.state         + '\n' +
+      'Source       : ' + fields.source        + '\n\n' +
+      'Please contact the applicant within 24–48 hours.\n' +
+      'Starex University Admissions — 2026–27'
+  };
+
+  /* ── 4. EmailJS — Applicant confirmation ──
+     Template variables used:
+       {{applicant_name}}   → applicant's full name
+       {{applicant_email}}  → set as "To Email" in the template (so it reaches the applicant)
+       {{program}}          → chosen program
+       {{ref_no}}           → reference number
+       {{submitted_at}}     → timestamp                                     */
+  const applicantPayload = {
+    applicant_name  : fields.full_name,
+    applicant_email : fields.email,       /* ← set this as "To Email" in your EmailJS template */
+    program         : fields.program,
+    ref_no          : refCode,
+    submitted_at    : fields.submitted_at
+  };
+
+  let adminOk = false;
+  let applicantOk = false;
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ADMIN, adminPayload);
+    adminOk = true;
+  } catch(err){
+    console.error('Admin email error:', err?.text || err);
+  }
+
+  /* Only send applicant email if the template ID has been configured */
+  if(EMAILJS_TEMPLATE_APPLICANT && EMAILJS_TEMPLATE_APPLICANT !== 'YOUR_APPLICANT_TEMPLATE_ID'){
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_APPLICANT, applicantPayload);
+      applicantOk = true;
     } catch(err){
-      const reason = err?.text || err?.message || JSON.stringify(err) || 'Unknown error';
-      document.getElementById('emailConfirmNote').textContent =
-        '❌ EmailJS error: ' + reason;
+      console.error('Applicant email error:', err?.text || err);
     }
+  }
+
+  /* ── 5. Show final status note ── */
+  if(applicantOk){
+    setNote('✅ Confirmation email sent to ' + fields.email, 'ok');
+  } else if(adminOk && EMAILJS_TEMPLATE_APPLICANT === 'YOUR_APPLICANT_TEMPLATE_ID'){
+    setNote('ℹ️ Create the applicant confirmation template in EmailJS and paste its ID into EMAILJS_TEMPLATE_APPLICANT to send replies to students.', 'warn');
+  } else if(adminOk){
+    setNote('⚠️ Admin notified, but applicant confirmation email failed. Check the template ID.', 'warn');
   } else {
-    document.getElementById('emailConfirmNote').textContent =
-      'ℹ️ Email notifications will be active once EmailJS is configured.';
+    setNote('⚠️ Emails could not be sent — check your EmailJS template/service IDs in the console.', 'err');
   }
 }
 </script>
