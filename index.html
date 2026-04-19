@@ -5,6 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Starex University — Admissions 2025–26</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  EMAIL SETUP — EmailJS (free, no backend required)          ║
+     ║  1. Go to https://www.emailjs.com and create a free account ║
+     ║  2. Add an Email Service (Gmail recommended)                ║
+     ║  3. Create an Email Template with variables:                ║
+     ║       {{to_email}}  {{to_name}}  {{program}}                ║
+     ║       {{ref_no}}    {{phone}}    {{state}}                  ║
+     ║  4. Replace the three placeholders below:                   ║
+     ║       YOUR_PUBLIC_KEY   → Account → General → Public Key    ║
+     ║       YOUR_SERVICE_ID   → Email Services → Service ID       ║
+     ║       YOUR_TEMPLATE_ID  → Email Templates → Template ID     ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  /* ── REPLACE THESE THREE VALUES ── */
+  const EMAILJS_PUBLIC_KEY   = 'OPyAilcw0Ei7IaKR9W5dB';   // e.g. 'abc123XYZ'
+  const EMAILJS_SERVICE_ID   = 'service_vo1sug9';   // e.g. 'service_starex'
+  const EMAILJS_TEMPLATE_ID  = 'template_osokv09';  // e.g. 'template_admission'
+  /* ────────────────────────────── */
+
+  (function(){
+    if(EMAILJS_PUBLIC_KEY !== 'OPyAilcw0Ei7IaKR9W5dB'){
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    }
+  })();
+</script>
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -21,10 +49,9 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:0 2.5rem;height:66px;box-shadow:0 2px 24px rgba(0,0,0,.45)
 }
-.nav-brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+/* Logo only — no brand text */
+.nav-brand{display:flex;align-items:center;text-decoration:none}
 .nav-brand img{height:44px;width:auto;object-fit:contain}
-.nav-brand-text h1{font-size:1rem;font-weight:700;color:#fff;letter-spacing:.02em;line-height:1.15}
-.nav-brand-text span{font-size:.6rem;font-weight:600;letter-spacing:.2em;color:var(--gold2);text-transform:uppercase}
 .nav-links{display:flex;align-items:center;gap:1.8rem;list-style:none}
 .nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.04em;transition:color .2s}
 .nav-links a:hover{color:var(--gold2)}
@@ -50,7 +77,7 @@ nav{
 .mobile-menu a{color:rgba(255,255,255,.8);text-decoration:none;font-size:1.1rem;font-weight:500;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .mobile-menu-close{position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer}
 
-/* ══ DARK TOP — hero + form + info, one seamless bg ══ */
+/* ══ DARK TOP ══ */
 .dark-top{
   background:radial-gradient(ellipse at 50% 0%,#1d3a6e 0%,var(--navy2) 55%);
   position:relative;overflow:hidden
@@ -71,7 +98,7 @@ nav{
 }
 .tricolour{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,#FF9933 33.33%,#fff 33.33% 66.66%,#138808 66.66%);z-index:2}
 
-/* ── 1. HERO: logo + badge + headline ── */
+/* ── HERO ── */
 .hero{
   padding:3.5rem 2.5rem 2rem;
   display:flex;flex-direction:column;align-items:center;
@@ -102,7 +129,7 @@ nav{
 .hero h2 em{font-style:italic;color:var(--gold2)}
 .hero-divider{width:72px;height:2px;background:linear-gradient(to right,var(--gold),transparent);margin:0 auto}
 
-/* ── 2. FORM BAND ── */
+/* ── FORM BAND ── */
 .form-band{
   padding:2rem 2.5rem 2.5rem;
   display:flex;justify-content:center;
@@ -162,8 +189,19 @@ nav{
 }
 .btn-form.primary{background:var(--gold);color:#fff}
 .btn-form.primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-form.primary:disabled{background:rgba(255,255,255,.2);cursor:not-allowed;transform:none}
 .btn-form.secondary{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.13)}
 .btn-form.secondary:hover{background:rgba(255,255,255,.14)}
+
+/* email sending status */
+.email-status{
+  margin-top:.6rem;padding:.5rem .75rem;border-radius:6px;
+  font-size:.68rem;font-weight:600;letter-spacing:.04em;text-align:center;
+  display:none
+}
+.email-status.sending{display:block;background:rgba(201,146,42,.12);border:1px solid rgba(201,146,42,.3);color:var(--gold2)}
+.email-status.sent{display:block;background:rgba(26,92,58,.15);border:1px solid rgba(26,92,58,.4);color:#4ade80}
+.email-status.error{display:block;background:rgba(139,26,26,.15);border:1px solid rgba(139,26,26,.4);color:#f87171}
 
 .form-success{display:none;text-align:center;padding:1rem 0}
 .form-success.show{display:block;animation:fadeUp .4s ease}
@@ -171,8 +209,9 @@ nav{
 .form-success h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:.45rem}
 .form-success p{font-size:.77rem;color:rgba(255,255,255,.55);line-height:1.65}
 .form-success .ref{display:inline-block;margin-top:.85rem;background:rgba(201,146,42,.14);border:1px solid rgba(201,146,42,.33);border-radius:6px;padding:.33rem .88rem;font-size:.72rem;font-weight:700;color:var(--gold2);letter-spacing:.1em}
+.email-note{font-size:.66rem;color:rgba(255,255,255,.35);margin-top:.6rem;line-height:1.6}
 
-/* ── 3. INFO BAND ── */
+/* ── INFO BAND — motto + tags only, contacts removed ── */
 .info-band{
   padding:2.2rem 2.5rem 3.5rem;
   display:flex;flex-direction:column;align-items:center;
@@ -180,11 +219,8 @@ nav{
   border-top:1px solid rgba(255,255,255,.07)
 }
 .info-motto{font-size:.82rem;color:rgba(255,255,255,.48);font-style:italic;letter-spacing:.05em;margin-bottom:1.4rem}
-.info-tags{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-bottom:2rem}
+.info-tags{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
 .htag{border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:.28rem .82rem;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72)}
-.info-contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem}
-.hci{display:flex;align-items:center;gap:.6rem;color:rgba(255,255,255,.72);font-size:.8rem}
-.hci-icon{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.8rem;background:rgba(255,255,255,.05);flex-shrink:0}
 
 /* ══ CONTENT SECTIONS ══ */
 .sec-white{background:#fff}
@@ -234,6 +270,7 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
 .footer-inner{max-width:1100px;margin:0 auto}
 .footer-top{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:3rem}
 .footer-logo{width:90px;height:auto;margin-bottom:1rem;filter:drop-shadow(0 4px 12px rgba(201,146,42,.3))}
+.footer-name{font-size:1rem;font-weight:700;color:#fff;letter-spacing:.02em;margin-bottom:.35rem}
 .footer-tagline{font-size:.79rem;color:rgba(255,255,255,.4);max-width:540px;line-height:1.75}
 .footer-cols{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.07)}
 .footer-col-title{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:1rem}
@@ -262,20 +299,15 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
   .footer-cols{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}
   .step-connector{width:36px}
-  .info-contacts{flex-direction:column;align-items:center}
 }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAVBAR — logo icon only, no name text -->
 <nav>
   <a href="#home" class="nav-brand">
     <img src="seulogo.png" alt="Starex University"/>
-    <div class="nav-brand-text">
-      <h1>Starex University</h1>
-      <span>Gurugram, Haryana, India</span>
-    </div>
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -299,16 +331,11 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
   <a href="#contact" onclick="closeMobileMenu()">Contact</a>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     DARK TOP — seamless dark section
-     1. Logo + Headline
-     2. Application Form
-     3. Motto + Tags + Contacts
-════════════════════════════════════════════ -->
+<!-- DARK TOP -->
 <div class="dark-top" id="home">
   <div class="tricolour"></div>
 
-  <!-- 1 · HERO -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-logo-wrap">
       <img src="seulogo.png" alt="Starex University" class="hero-logo"/>
@@ -321,7 +348,7 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
     <div class="hero-divider"></div>
   </section>
 
-  <!-- 2 · APPLICATION FORM -->
+  <!-- APPLICATION FORM -->
   <div class="form-band" id="apply">
     <div class="form-card">
       <div class="form-header">
@@ -445,12 +472,13 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
           <div class="review-row"><span class="review-key">State</span><span class="review-val" id="rv_state">—</span></div>
         </div>
         <p style="font-size:.67rem;color:rgba(255,255,255,.36);margin-bottom:.8rem;line-height:1.65">
-          By submitting, you agree to be contacted by the Starex University admissions team.
+          By submitting, you agree to be contacted by the Starex University admissions team. A confirmation will be sent to your email.
         </p>
         <div class="form-btns">
           <button class="btn-form secondary" onclick="prevStep(3)">← Edit</button>
-          <button class="btn-form primary" onclick="submitForm()">Submit Application ✓</button>
+          <button class="btn-form primary" id="submitBtn" onclick="submitForm()">Submit Application ✓</button>
         </div>
+        <div class="email-status" id="emailStatus"></div>
       </div>
 
       <!-- Success -->
@@ -459,11 +487,12 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
         <h4>Application Submitted!</h4>
         <p>Our admissions team will contact you within <strong style="color:var(--gold2)">24–48 hours</strong> to guide you through the next steps.</p>
         <div class="ref" id="refNo"></div>
+        <p class="email-note" id="emailConfirmNote"></p>
       </div>
     </div>
   </div>
 
-  <!-- 3 · INFO: motto + tags + contacts -->
+  <!-- INFO BAND — motto + tags only, contacts removed (now in footer) -->
   <div class="info-band">
     <p class="info-motto">Nunc Est Semper · Now is Forever &nbsp;|&nbsp; UGC Approved · Gurugram, Haryana, India</p>
     <div class="info-tags">
@@ -472,11 +501,6 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
       <span class="htag">Top Ranked</span>
       <span class="htag">Industry Ready</span>
       <span class="htag">95% Placement</span>
-    </div>
-    <div class="info-contacts">
-      <div class="hci"><div class="hci-icon">📞</div><span>+91-73311-12501</span></div>
-      <div class="hci"><div class="hci-icon">✉️</div><span>starexuniversityofficial@gmail.com</span></div>
-      <div class="hci"><div class="hci-icon">📍</div><span>NH-48, Binola, Gurugram, Haryana – 122413</span></div>
     </div>
   </div>
 
@@ -535,11 +559,12 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
   <a href="#apply" class="btn-cta">Apply for Admission →</a>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER — full contact details live here -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
       <img src="seulogo.png" alt="Starex University" class="footer-logo"/>
+      <div class="footer-name">Starex University</div>
       <p class="footer-tagline">Starex University is a UGC-approved institution committed to quality education, innovation, industry readiness, and holistic student development.</p>
     </div>
     <div class="footer-cols">
@@ -554,7 +579,7 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Contact</div>
+        <div class="footer-col-title">Contact Us</div>
         <ul class="footer-contact-list">
           <li>📞 +91-73311-12501</li>
           <li>✉️ starexuniversityofficial@gmail.com</li>
@@ -570,10 +595,12 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
 </footer>
 
 <script>
+/* ── Mobile menu ── */
 document.getElementById('menuBtn').addEventListener('click',()=>{document.getElementById('mobileMenu').classList.add('open')});
 document.getElementById('menuClose').addEventListener('click',closeMobileMenu);
 function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open')}
 
+/* ── Step navigation ── */
 function setStep(n){
   document.querySelectorAll('.form-step').forEach(s=>s.classList.remove('active'));
   const t=document.getElementById('step'+n);
@@ -623,12 +650,94 @@ function populateReview(){
   document.getElementById('rv_state').textContent   = document.getElementById('f_state').value;
 }
 
-function submitForm(){
-  document.getElementById('stepProgress').style.display='none';
+/* ╔══════════════════════════════════════════════════════════╗
+   ║  FORMSPREE endpoint — stores every submission           ║
+   ║  View all entries at https://formspree.io/forms         ║
+   ╚══════════════════════════════════════════════════════════╝ */
+const FORMSPREE_URL = 'https://formspree.io/f/xnjldypb';
+
+/* ── Form submission: Formspree (data) + EmailJS (notification) ── */
+async function submitForm(){
+  const btn     = document.getElementById('submitBtn');
+  const refCode = 'SU-' + new Date().getFullYear() + '-' + (Math.floor(Math.random()*90000)+10000);
+  const now     = new Date();
+
+  /* Collect all field values once */
+  const fields = {
+    reference_number : refCode,
+    full_name        : document.getElementById('f_name').value.trim(),
+    email            : document.getElementById('f_email').value.trim(),
+    mobile           : document.getElementById('f_phone').value.trim(),
+    gender           : document.getElementById('f_gender').value,
+    program          : document.getElementById('f_program').value,
+    pass_year        : document.getElementById('f_year').value,
+    state            : document.getElementById('f_state').value,
+    source           : document.getElementById('f_source').value || 'Not specified',
+    submitted_at     : now.toLocaleString('en-IN', { dateStyle:'long', timeStyle:'short' })
+  };
+
+  /* Disable button to prevent double-submit */
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  /* ── 1. FORMSPREE — store the submission ── */
+  try {
+    const res = await fetch(FORMSPREE_URL, {
+      method  : 'POST',
+      headers : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body    : JSON.stringify(fields)
+    });
+    if(!res.ok) console.warn('Formspree responded with', res.status);
+  } catch(err){
+    console.error('Formspree error:', err);
+  }
+
+  /* ── 2. Show success screen ── */
+  document.getElementById('stepProgress').style.display = 'none';
   document.querySelectorAll('.form-step').forEach(s=>s.style.display='none');
-  const s=document.getElementById('formSuccess');
-  s.classList.add('show');
-  document.getElementById('refNo').textContent='Reference No: SU-'+new Date().getFullYear()+'-'+(Math.floor(Math.random()*90000)+10000);
+  document.getElementById('formSuccess').classList.add('show');
+  document.getElementById('refNo').textContent = 'Reference No: ' + refCode;
+
+  /* ── 3. EMAILJS — send notification email ── */
+  /* Variable names match the EmailJS template:
+     {{name}}    → applicant full name  (From Name field)
+     {{email}}   → applicant email      (Reply To field)
+     {{title}}   → subject line suffix
+     {{time}}    → submission timestamp
+     {{message}} → full formatted details block              */
+  if(EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY'){
+    const emailPayload = {
+      name    : fields.full_name,
+      email   : fields.email,
+      title   : fields.program + ' — Admission Application',
+      time    : fields.submitted_at,
+      message :
+        '📋 Admission Application Details\n\n' +
+        'Reference No : ' + refCode              + '\n' +
+        'Full Name    : ' + fields.full_name     + '\n' +
+        'Mobile       : ' + fields.mobile        + '\n' +
+        'Email        : ' + fields.email         + '\n' +
+        'Gender       : ' + fields.gender        + '\n' +
+        'Program      : ' + fields.program       + '\n' +
+        '12th Year    : ' + fields.pass_year     + '\n' +
+        'State        : ' + fields.state         + '\n' +
+        'Source       : ' + fields.source        + '\n\n' +
+        'Please contact the applicant within 24–48 hours.\n' +
+        'Starex University Admissions — 2025–26'
+    };
+    try{
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailPayload);
+      document.getElementById('emailConfirmNote').textContent =
+        '✅ A confirmation has been sent to ' + fields.email;
+    } catch(err){
+      console.error('EmailJS error:', err);
+      document.getElementById('emailConfirmNote').textContent =
+        'ℹ️ Could not send confirmation email. Please save your reference number.';
+    }
+  } else {
+    document.getElementById('emailConfirmNote').textContent =
+      'ℹ️ Email notifications will be active once EmailJS is configured.';
+  }
 }
 </script>
 </body>
