@@ -21,16 +21,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   /* ── REPLACE THESE THREE VALUES ── */
-  const EMAILJS_PUBLIC_KEY   = 'OPyAilcw0Ei7IaKR9W5dB';   // e.g. 'abc123XYZ'
-  const EMAILJS_SERVICE_ID   = 'service_vo1sug9';   // e.g. 'service_starex'
-  const EMAILJS_TEMPLATE_ID  = 'template_osokv09';  // e.g. 'template_admission'
+
+  const EMAILJS_PUBLIC_KEY   = '7vaB0F9gRTwKBmnaVN7t';
+  const EMAILJS_SERVICE_ID   = 'service_vo1sug9';
+  const EMAILJS_TEMPLATE_ID  = 'template_osokv09';
   /* ────────────────────────────── */
 
-  (function(){
-    if(EMAILJS_PUBLIC_KEY !== 'OPyAilcw0Ei7IaKR9W5dB'){
-      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-    }
-  })();
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 </script>
 
 <style>
@@ -705,7 +702,7 @@ async function submitForm(){
      {{title}}   → subject line suffix
      {{time}}    → submission timestamp
      {{message}} → full formatted details block              */
-  if(EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY'){
+  if(EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY'){
     const emailPayload = {
       name    : fields.full_name,
       email   : fields.email,
@@ -730,9 +727,9 @@ async function submitForm(){
       document.getElementById('emailConfirmNote').textContent =
         '✅ A confirmation has been sent to ' + fields.email;
     } catch(err){
-      console.error('EmailJS error:', err);
+      const reason = err?.text || err?.message || JSON.stringify(err) || 'Unknown error';
       document.getElementById('emailConfirmNote').textContent =
-        'ℹ️ Could not send confirmation email. Please save your reference number.';
+        '❌ EmailJS error: ' + reason;
     }
   } else {
     document.getElementById('emailConfirmNote').textContent =
