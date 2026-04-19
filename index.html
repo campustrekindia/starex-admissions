@@ -345,7 +345,7 @@ footer{background:#06101e;padding:4rem 2.5rem 2rem}
       <span class="badge-dot"></span>
       Admissions Open — 2026–27
     </div>
-    <h2>Shape Your <em>Future</em> with Excellence!</h2>
+    <h2>Shape Your <em>Future</em> with Excellence</h2>
     <div class="hero-divider"></div>
   </section>
 
@@ -730,49 +730,53 @@ async function submitForm(){
   };
 
   /* ── 4. EmailJS — Applicant confirmation ──
-     Template variables used:
-       {{applicant_name}}   → applicant's full name
-       {{applicant_email}}  → set as "To Email" in the template (so it reaches the applicant)
-       {{program}}          → chosen program
-       {{ref_no}}           → reference number
-       {{submitted_at}}     → timestamp                                     */
+     Sends every possible variable name alias so the template matches
+     regardless of what variable names you used in the EmailJS editor.
+     Make sure your template's "To Email" field is set to: {{to_email}} */
   const applicantPayload = {
+    /* Names used in the template HTML body */
     applicant_name  : fields.full_name,
-    applicant_email : fields.email,       /* ← set this as "To Email" in your EmailJS template */
+    applicant_email : fields.email,
     program         : fields.program,
     ref_no          : refCode,
-    submitted_at    : fields.submitted_at
+    submitted_at    : fields.submitted_at,
+    /* EmailJS built-in "To" field aliases — one of these will resolve */
+    to_name         : fields.full_name,
+    to_email        : fields.email,
+    /* Generic aliases as fallback */
+    name            : fields.full_name,
+    email           : fields.email,
+    from_name       : 'Starex University Admissions',
+    reply_to        : 'starexuniversityofficial@gmail.com',
+    message         : 'Thank you for applying. Your reference number is ' + refCode + '.'
   };
 
   let adminOk = false;
   let applicantOk = false;
+  let applicantErr = '';
 
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ADMIN, adminPayload);
     adminOk = true;
   } catch(err){
-    console.error('Admin email error:', err?.text || err);
+    console.error('Admin email error:', err);
   }
 
-  /* Only send applicant email if the template ID has been configured */
-  if(EMAILJS_TEMPLATE_APPLICANT && EMAILJS_TEMPLATE_APPLICANT !== 'YOUR_APPLICANT_TEMPLATE_ID'){
-    try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_APPLICANT, applicantPayload);
-      applicantOk = true;
-    } catch(err){
-      console.error('Applicant email error:', err?.text || err);
-    }
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_APPLICANT, applicantPayload);
+    applicantOk = true;
+  } catch(err){
+    applicantErr = err?.text || err?.message || JSON.stringify(err) || 'Unknown error';
+    console.error('Applicant email error detail:', applicantErr);
   }
 
-  /* ── 5. Show final status note ── */
+  /* ── 5. Show final status — real error surfaced if failed ── */
   if(applicantOk){
     setNote('✅ Confirmation email sent to ' + fields.email, 'ok');
-  } else if(adminOk && EMAILJS_TEMPLATE_APPLICANT === 'YOUR_APPLICANT_TEMPLATE_ID'){
-    setNote('ℹ️ Create the applicant confirmation template in EmailJS and paste its ID into EMAILJS_TEMPLATE_APPLICANT to send replies to students.', 'warn');
   } else if(adminOk){
-    setNote('⚠️ Admin notified, but applicant confirmation email failed. Check the template ID.', 'warn');
+    setNote('⚠️ Admin notified. Applicant email failed — ' + applicantErr, 'warn');
   } else {
-    setNote('⚠️ Emails could not be sent — check your EmailJS template/service IDs in the console.', 'err');
+    setNote('⚠️ Both emails failed — ' + applicantErr, 'err');
   }
 }
 </script>
