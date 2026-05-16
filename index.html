@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <meta http-equiv="X-Content-Type-Options" content="nosniff"/>
-<meta name="description" content="Apply for admission at Starex University 2026–27. UGC approved university in Gurugram offering Engineering, MBA, Law, Pharmacy, Arts & Science programs."/>
+<meta name="description" content="Apply for admission at Starex University 2026–27. UGC approved university in Gurugram offering Engineering, MBA, Law, Pharmacy, Arts &amp; Science programs."/>
 <title>Starex University — Admissions 2026–27</title>
 
 <!-- Google Fonts -->
@@ -143,7 +143,7 @@ nav{
 
 /* ══ HERO ══ */
 .hero{
-  padding:clamp(2.5rem,6vw,4rem) clamp(1rem,4vw,2.5rem) clamp(1.5rem,3vw,2rem);
+  padding:clamp(2.5rem,6vw,4rem) clamp(1rem,4vw,2.5rem) clamp(1rem,2vw,1.5rem);
   display:flex;flex-direction:column;align-items:center;
   text-align:center;position:relative;z-index:1;
 }
@@ -186,6 +186,27 @@ nav{
   width:60px;height:2px;
   background:linear-gradient(to right,var(--gold),transparent);
   margin:0 auto;
+}
+
+/* ══ HERO BANNER IMAGE ══ */
+.hero-banner-wrap{
+  padding:1.2rem clamp(1rem,4vw,2.5rem) 1rem;
+  display:flex;justify-content:center;
+  position:relative;z-index:1;
+}
+.hero-banner-img{
+  width:100%;max-width:960px;
+  border-radius:18px;
+  box-shadow:0 24px 64px rgba(0,0,0,.55);
+  border:1.5px solid rgba(255,255,255,.12);
+  object-fit:cover;
+  max-height:440px;
+  display:block;
+  transition:transform .4s ease,box-shadow .4s ease;
+}
+.hero-banner-img:hover{
+  transform:scale(1.012);
+  box-shadow:0 32px 80px rgba(0,0,0,.65);
 }
 
 /* ══ FORM BAND ══ */
@@ -246,11 +267,10 @@ nav{
 .form-step.active{display:block;animation:fadeUp .3s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── SECTION TITLE inside form ── */
 .form-section-title{
   font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
   color:var(--gold3);margin:1rem 0 .7rem;
-  padding-left:.1rem;border-left:2px solid var(--gold);padding-left:.5rem;
+  padding-left:.5rem;border-left:2px solid var(--gold);
 }
 
 /* Fields */
@@ -288,8 +308,6 @@ nav{
 .field select option{background:#0b1830;color:#fff}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
 .field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem}
-
-/* Select custom arrow */
 .field select{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat;
@@ -399,6 +417,76 @@ nav{
   padding:.26rem .78rem;font-size:.6rem;font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;
   color:rgba(255,255,255,.65);
+}
+
+/* ══ SCROLLING CAROUSEL BAND ══ */
+.scroll-band{
+  background:var(--navy2);
+  padding:clamp(2rem,4vw,3rem) 0;
+  overflow:hidden;
+  border-top:1px solid rgba(201,144,30,.18);
+  border-bottom:1px solid rgba(201,144,30,.18);
+}
+.scroll-band-label{
+  text-align:center;
+  font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.4rem;
+}
+.scroll-band-title{
+  text-align:center;
+  font-family:var(--font-display);
+  font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;
+  color:#fff;margin-bottom:1.6rem;
+}
+.scroll-band-title em{font-style:italic;color:var(--gold2)}
+.marquee-viewport{
+  overflow:hidden;
+  width:100%;
+  cursor:grab;
+}
+.marquee-viewport:active{cursor:grabbing}
+.marquee-track{
+  display:flex;
+  gap:1.6rem;
+  width:max-content;
+  animation:marquee-scroll 22s linear infinite;
+  padding:0 .8rem;
+  will-change:transform;
+}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.marquee-img{
+  width:clamp(260px,30vw,380px);
+  height:clamp(260px,30vw,380px);
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 10px 36px rgba(0,0,0,.45);
+  flex-shrink:0;
+  border:1.5px solid rgba(255,255,255,.1);
+  transition:transform .35s ease,box-shadow .35s ease,border-color .35s;
+  display:block;
+}
+.marquee-img:hover{
+  transform:scale(1.04) translateY(-4px);
+  box-shadow:0 20px 56px rgba(200,144,30,.35);
+  border-color:rgba(200,144,30,.45);
+}
+
+/* Dots below carousel */
+.carousel-dots{
+  display:flex;justify-content:center;gap:.5rem;margin-top:1.4rem;
+}
+.carousel-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.2);
+  transition:background .3s,transform .3s;
+}
+.carousel-dot.active{
+  background:var(--gold2);
+  transform:scale(1.3);
 }
 
 /* ══ WHITE SECTION ══ */
@@ -515,6 +603,75 @@ nav{
   content:'›';position:absolute;left:0;color:var(--gold2);font-weight:700;
 }
 
+/* ══ GALLERY ══ */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+}
+.gallery-item{
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.1);
+  transition:transform .35s ease,box-shadow .35s ease;
+  aspect-ratio:1/1;
+  position:relative;
+  background:var(--cream2);
+  cursor:pointer;
+}
+.gallery-item:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 18px 48px rgba(0,0,0,.2);
+}
+.gallery-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s ease;
+}
+.gallery-item:hover img{
+  transform:scale(1.07);
+}
+.gallery-item-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(6,14,30,.7) 0%,transparent 60%);
+  opacity:0;
+  transition:opacity .35s ease;
+  display:flex;align-items:flex-end;
+  padding:.9rem 1rem;
+}
+.gallery-item:hover .gallery-item-overlay{opacity:1}
+.gallery-item-label{
+  font-size:.62rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold3);
+}
+
+/* Lightbox */
+.lightbox{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(6,14,30,.95);
+  align-items:center;justify-content:center;
+  padding:1rem;
+}
+.lightbox.open{display:flex;animation:lbIn .25s ease}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lightbox-img{
+  max-width:90vw;max-height:88vh;
+  border-radius:14px;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);
+  object-fit:contain;
+  display:block;
+}
+.lightbox-close{
+  position:fixed;top:1.2rem;right:1.4rem;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:1.4rem;
+  width:42px;height:42px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.lightbox-close:hover{background:rgba(255,255,255,.2)}
+
 /* CTA */
 .cta-section{
   background:radial-gradient(ellipse at 50% 0%,#1c3368 0%,var(--navy2) 70%);
@@ -590,6 +747,7 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
   .infra-grid{grid-template-columns:repeat(2,1fr)}
   .eligibility-grid{grid-template-columns:1fr}
   .footer-cols{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:600px){
   nav{padding:0 1rem}
@@ -601,11 +759,14 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
   .field-row,.field-row-3{grid-template-columns:1fr}
   .step-connector{max-width:36px}
   .step-wrap{min-width:50px}
+  .hero-banner-img{max-height:220px;border-radius:12px}
+  .marquee-img{width:220px;height:220px}
 }
 @media(max-width:400px){
   .stats-grid{grid-template-columns:1fr 1fr}
   .form-btns{flex-direction:column}
   .btn-form{width:100%}
+  .gallery-grid{grid-template-columns:1fr 1fr}
 }
 
 /* ══ UTILITY ══ */
@@ -625,6 +786,7 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
     <li><a href="#programs">Programs</a></li>
     <li><a href="#eligibility">Eligibility</a></li>
     <li><a href="#campus">Campus</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
@@ -641,6 +803,7 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
   <a href="#programs"    onclick="closeMobileMenu()">Programs</a>
   <a href="#eligibility" onclick="closeMobileMenu()">Eligibility</a>
   <a href="#campus"      onclick="closeMobileMenu()">Campus</a>
+  <a href="#gallery"     onclick="closeMobileMenu()">Gallery</a>
   <a href="#apply"       onclick="closeMobileMenu()">Apply Now</a>
   <a href="#contact"     onclick="closeMobileMenu()">Contact</a>
 </div>
@@ -662,6 +825,16 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
     <p class="hero-sub">UGC Approved · Gurugram, Haryana &nbsp;|&nbsp; 50+ Programs &nbsp;|&nbsp; 95% Placement Rate</p>
     <div class="hero-divider" aria-hidden="true"></div>
   </section>
+
+  <!-- ══ HERO BANNER IMAGE ══ -->
+  <div class="hero-banner-wrap" aria-label="Starex University featured image">
+    <img
+      src="https://i.ibb.co/7dngrRzP/image.png"
+      alt="Starex University — Shaping futures through excellence"
+      class="hero-banner-img"
+      loading="eager"
+    />
+  </div>
 
   <!-- ══ APPLICATION FORM ══ -->
   <div class="form-band" id="apply">
@@ -990,6 +1163,34 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
 
 </div><!-- /dark-top -->
 
+<!-- ══ SCROLLING POSTER CAROUSEL ══ -->
+<div class="scroll-band" aria-label="University highlights carousel">
+  <div class="scroll-band-label">University Highlights</div>
+  <h2 class="scroll-band-title">Life at <em>Starex</em></h2>
+  <div class="marquee-viewport" role="region" aria-label="Scrolling university posters">
+    <!-- Images duplicated for seamless infinite CSS loop -->
+    <div class="marquee-track" id="marqueeTrack">
+      <img src="https://i.ibb.co/MDf7XVCc/WESBITE-IMAGES.png"
+           alt="Starex University — Campus Highlights"
+           class="marquee-img" loading="lazy"/>
+      <img src="https://i.ibb.co/27Nd12fz/WESBITE-IMAGES-3.png"
+           alt="Starex University — Events &amp; Activities"
+           class="marquee-img" loading="lazy"/>
+      <!-- Duplicates for seamless loop -->
+      <img src="https://i.ibb.co/MDf7XVCc/WESBITE-IMAGES.png"
+           alt="Starex University — Campus Highlights"
+           class="marquee-img" loading="lazy" aria-hidden="true"/>
+      <img src="https://i.ibb.co/27Nd12fz/WESBITE-IMAGES-3.png"
+           alt="Starex University — Events &amp; Activities"
+           class="marquee-img" loading="lazy" aria-hidden="true"/>
+    </div>
+  </div>
+  <div class="carousel-dots" aria-hidden="true">
+    <div class="carousel-dot active" id="dot0"></div>
+    <div class="carousel-dot" id="dot1"></div>
+  </div>
+</div>
+
 <!-- ══ STATS ══ -->
 <div class="sec-white">
   <div class="section" id="about">
@@ -1164,6 +1365,64 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
   </div>
 </div>
 
+<!-- ══ GALLERY ══ -->
+<div class="sec-cream" id="gallery">
+  <div class="section">
+    <div class="sec-label">Campus &amp; Events</div>
+    <h2 class="sec-title">University Gallery</h2>
+    <div class="gallery-grid">
+
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/ksn8JYDB/STAREX-UNIV-INSTA-POST-2.png','Starex University Post 2')"
+           role="button" tabindex="0" aria-label="View image: Starex University Post 2"
+           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
+        <img src="https://i.ibb.co/ksn8JYDB/STAREX-UNIV-INSTA-POST-2.png"
+             alt="Starex University — Social Media Post 2" loading="lazy"/>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-label">View Full</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/FqBHygfT/STAREX-UNIV-INSTA-POST-1.png','Starex University Post 1')"
+           role="button" tabindex="0" aria-label="View image: Starex University Post 1"
+           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
+        <img src="https://i.ibb.co/FqBHygfT/STAREX-UNIV-INSTA-POST-1.png"
+             alt="Starex University — Social Media Post 1" loading="lazy"/>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-label">View Full</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/9kQpLb1G/STAREX-UNIV-INSTA-POST-5.png','Starex University Post 5')"
+           role="button" tabindex="0" aria-label="View image: Starex University Post 5"
+           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
+        <img src="https://i.ibb.co/9kQpLb1G/STAREX-UNIV-INSTA-POST-5.png"
+             alt="Starex University — Social Media Post 5" loading="lazy"/>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-label">View Full</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/1JXPdG3B/STAREX-UNIV-INSTA-POST-4.png','Starex University Post 4')"
+           role="button" tabindex="0" aria-label="View image: Starex University Post 4"
+           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
+        <img src="https://i.ibb.co/1JXPdG3B/STAREX-UNIV-INSTA-POST-4.png"
+             alt="Starex University — Social Media Post 4" loading="lazy"/>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-label">View Full</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer"
+     onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close image viewer">✕</button>
+  <img src="" alt="" class="lightbox-img" id="lightboxImg"/>
+</div>
+
 <!-- ══ CTA ══ -->
 <section class="cta-section" id="contact" aria-labelledby="ctaHeading">
   <h2 id="ctaHeading">Ready to Begin Your Journey?</h2>
@@ -1191,6 +1450,7 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
           <li><a href="#programs">Programs &amp; Courses</a></li>
           <li><a href="#eligibility">Eligibility Criteria</a></li>
           <li><a href="#campus">Campus Life</a></li>
+          <li><a href="#gallery">Gallery</a></li>
         </ul>
       </div>
       <div>
@@ -1396,6 +1656,47 @@ function setNote(msg,type){
 }
 
 /* ══════════════════════════════════
+   CAROUSEL DOTS
+══════════════════════════════════ */
+(function(){
+  var dotEls=[document.getElementById('dot0'),document.getElementById('dot1')];
+  var total=2;
+  var idx=0;
+  setInterval(function(){
+    dotEls[idx].classList.remove('active');
+    idx=(idx+1)%total;
+    dotEls[idx].classList.add('active');
+  },11000); /* half of 22s animation */
+})();
+
+/* ══════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════ */
+function openLightbox(src,alt){
+  var lb=document.getElementById('lightbox');
+  var img=document.getElementById('lightboxImg');
+  img.src=src;
+  img.alt=alt||'Gallery image';
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+  lb.focus();
+}
+function closeLightbox(evt){
+  if(evt&&evt.target!==document.getElementById('lightbox')&&
+     !evt.target.classList.contains('lightbox-close'))return;
+  if(!evt){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+    return;
+  }
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')closeLightbox();
+});
+
+/* ══════════════════════════════════
    SUBMIT
    1 → Formspree (lead backup)
    2 → Show success
@@ -1507,7 +1808,7 @@ async function submitForm(){
       '— Starex University Admissions Team'
   };
 
-  var adminOk=false,applicantOk=false,applicantErr='';
+  var adminOk=false,applicantOk=false;
 
   try{
     await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ADMIN,adminPayload);
@@ -1518,8 +1819,7 @@ async function submitForm(){
     await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_APPLICANT,applicantPayload);
     applicantOk=true;
   }catch(err){
-    applicantErr=(err&&(err.text||err.message))?(err.text||err.message):'Unknown error';
-    console.error('Applicant email error:',applicantErr);
+    console.error('Applicant email error:',err&&(err.text||err.message));
   }
 
   if(applicantOk){
