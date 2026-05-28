@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <meta http-equiv="X-Content-Type-Options" content="nosniff"/>
 
+<!-- ══ FAVICON — makes logo appear in Google search results ══ -->
+<link rel="icon" type="image/png" sizes="32x32" href="seulogo.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="seulogo.png"/>
+<link rel="shortcut icon" href="seulogo.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="seulogo.png"/>
+<meta name="msapplication-TileImage" content="seulogo.png"/>
+<meta name="theme-color" content="#0b1830"/>
+
 <!-- ══ PRIMARY SEO META ══ -->
 <title>Starex University Gurugram | UGC Approved | Admissions 2026-27</title>
 <meta name="description" content="Starex University — UGC approved university in Gurugram, Haryana. B.Tech, MBA, LLB, B.Pharma &amp; 50+ programs. 95% placement rate, 500+ recruiters. Apply online for 2026-27 admissions in 3 minutes."/>
@@ -232,7 +240,24 @@ nav{
   border-bottom:1px solid rgba(201,144,30,.18);
 }
 .nav-brand{display:flex;align-items:center;gap:.65rem;text-decoration:none}
-.nav-brand img{height:38px;width:auto;object-fit:contain}
+
+/* Logo wrapper — circular crop removes black background */
+.nav-logo-wrap{
+  width:38px;height:38px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  border:1.5px solid rgba(200,144,30,.4);
+  box-shadow:0 0 10px rgba(200,144,30,.25);
+}
+.nav-logo-wrap img{
+  width:34px;height:34px;
+  object-fit:contain;
+  display:block;
+}
+
 .nav-brand-name{
   font-family:var(--font-display);
   font-size:1.1rem;font-weight:700;
@@ -320,10 +345,26 @@ nav{
   border-radius:50%;animation:glow 3.5s ease-in-out infinite;
 }
 @keyframes glow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
-.hero-logo{
-  width:clamp(70px,12vw,100px);height:auto;position:relative;z-index:1;
-  filter:drop-shadow(0 6px 24px rgba(200,144,30,.55));
+
+/* Hero logo — white circle background to remove black padding from logo */
+.hero-logo-circle{
+  width:clamp(80px,12vw,110px);
+  height:clamp(80px,12vw,110px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  border:2px solid rgba(200,144,30,.5);
+  box-shadow:0 8px 32px rgba(200,144,30,.45);
+  overflow:hidden;
 }
+.hero-logo{
+  width:90%;height:90%;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.15));
+}
+
 .hero-badge{
   display:inline-flex;align-items:center;gap:.5rem;
   background:rgba(255,255,255,.06);border:1px solid rgba(200,144,30,.35);
@@ -605,112 +646,56 @@ nav{
   color:#fff;margin-bottom:1.6rem;
 }
 .scroll-band-title em{font-style:italic;color:var(--gold2)}
-.marquee-viewport{
-  overflow:hidden;
-  width:100%;
-  cursor:grab;
-}
+.marquee-viewport{overflow:hidden;width:100%;cursor:grab}
 .marquee-viewport:active{cursor:grabbing}
 .marquee-track{
-  display:flex;
-  gap:1.6rem;
-  width:max-content;
+  display:flex;gap:1.6rem;width:max-content;
   animation:marquee-scroll 22s linear infinite;
-  padding:0 .8rem;
-  will-change:transform;
+  padding:0 .8rem;will-change:transform;
 }
 .marquee-track:hover{animation-play-state:paused}
-@keyframes marquee-scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
+@keyframes marquee-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .marquee-img{
-  width:clamp(260px,30vw,380px);
-  height:clamp(260px,30vw,380px);
-  object-fit:cover;
-  border-radius:16px;
+  width:clamp(260px,30vw,380px);height:clamp(260px,30vw,380px);
+  object-fit:cover;border-radius:16px;
   box-shadow:0 10px 36px rgba(0,0,0,.45);
-  flex-shrink:0;
-  border:1.5px solid rgba(255,255,255,.1);
-  transition:transform .35s ease,box-shadow .35s ease,border-color .35s;
-  display:block;
+  flex-shrink:0;border:1.5px solid rgba(255,255,255,.1);
+  transition:transform .35s ease,box-shadow .35s ease,border-color .35s;display:block;
 }
 .marquee-img:hover{
   transform:scale(1.04) translateY(-4px);
   box-shadow:0 20px 56px rgba(200,144,30,.35);
   border-color:rgba(200,144,30,.45);
 }
-
-.carousel-dots{
-  display:flex;justify-content:center;gap:.5rem;margin-top:1.4rem;
-}
-.carousel-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:rgba(255,255,255,.2);
-  transition:background .3s,transform .3s;
-}
-.carousel-dot.active{
-  background:var(--gold2);
-  transform:scale(1.3);
-}
+.carousel-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.4rem}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s,transform .3s}
+.carousel-dot.active{background:var(--gold2);transform:scale(1.3)}
 
 /* ══ WHITE SECTION ══ */
 .sec-white{background:#fff}
 .sec-cream{background:var(--cream)}
 .sec-navy{background:var(--navy2)}
-.section{
-  padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,2.5rem);
-  max-width:1100px;margin:0 auto;
-}
-.sec-label{
-  font-size:.6rem;font-weight:700;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:.45rem;
-}
-.sec-title{
-  font-family:var(--font-display);
-  font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;
-  color:var(--text);margin-bottom:2.2rem;line-height:1.25;
-}
+.section{padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,2.5rem);max-width:1100px;margin:0 auto}
+.sec-label{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem}
+.sec-title{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--text);margin-bottom:2.2rem;line-height:1.25}
 .sec-title.light{color:#fff}
 
 /* Stats */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.stat-card{
-  background:var(--white);border-radius:14px;
-  padding:clamp(1.2rem,3vw,1.8rem) clamp(1rem,2vw,1.4rem);
-  border-top:3px solid;
-  box-shadow:0 2px 16px rgba(0,0,0,.06);
-  transition:transform .2s,box-shadow .2s;
-}
+.stat-card{background:var(--white);border-radius:14px;padding:clamp(1.2rem,3vw,1.8rem) clamp(1rem,2vw,1.4rem);border-top:3px solid;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s}
 .stat-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.1)}
 .stat-card:nth-child(1){border-color:var(--gold)}
 .stat-card:nth-child(2){border-color:var(--red)}
 .stat-card:nth-child(3){border-color:var(--green)}
 .stat-card:nth-child(4){border-color:var(--navy)}
-.stat-num{
-  font-family:var(--font-display);
-  font-size:clamp(2rem,4vw,2.8rem);font-weight:700;
-  color:var(--text);line-height:1;margin-bottom:.38rem;
-}
+.stat-num{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:var(--text);line-height:1;margin-bottom:.38rem}
 .stat-lbl{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 .stat-desc{font-size:.72rem;color:var(--muted);margin-top:.35rem;line-height:1.55}
 
 /* Programs */
 .programs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.prog-card{
-  background:var(--white);border-radius:14px;
-  padding:clamp(1.2rem,3vw,1.5rem) clamp(1rem,2vw,1.3rem);
-  border-left:3px solid;
-  box-shadow:0 2px 12px rgba(0,0,0,.05);
-  transition:transform .2s,box-shadow .2s;
-  position:relative;overflow:hidden;
-}
-.prog-card::before{
-  content:'';position:absolute;top:0;right:0;
-  width:80px;height:80px;border-radius:50%;
-  transform:translate(25px,-25px);
-  opacity:.06;
-}
+.prog-card{background:var(--white);border-radius:14px;padding:clamp(1.2rem,3vw,1.5rem) clamp(1rem,2vw,1.3rem);border-left:3px solid;box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.prog-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;border-radius:50%;transform:translate(25px,-25px);opacity:.06}
 .prog-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
 .prog-card:nth-child(1){border-color:var(--gold)}
 .prog-card:nth-child(2){border-color:var(--red)}
@@ -721,213 +706,88 @@ nav{
 .prog-icon{font-size:1.6rem;margin-bottom:.65rem;display:block}
 .prog-card h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
 .prog-card p{font-size:.71rem;color:var(--muted);line-height:1.65}
-.prog-duration{
-  display:inline-block;margin-top:.55rem;
-  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  padding:.18rem .55rem;border-radius:999px;
-  background:rgba(0,0,0,.05);color:var(--muted);
-}
+.prog-duration{display:inline-block;margin-top:.55rem;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .55rem;border-radius:999px;background:rgba(0,0,0,.05);color:var(--muted)}
 
 /* Infra */
 .infra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.infra-card{
-  background:var(--cream);border-radius:14px;
-  padding:clamp(1rem,3vw,1.4rem) clamp(.9rem,2vw,1.2rem);
-  display:flex;gap:.85rem;align-items:flex-start;
-  box-shadow:0 1px 8px rgba(0,0,0,.04);
-  transition:transform .2s,box-shadow .2s;
-  border:1px solid var(--cream2);
-}
+.infra-card{background:var(--cream);border-radius:14px;padding:clamp(1rem,3vw,1.4rem) clamp(.9rem,2vw,1.2rem);display:flex;gap:.85rem;align-items:flex-start;box-shadow:0 1px 8px rgba(0,0,0,.04);transition:transform .2s,box-shadow .2s;border:1px solid var(--cream2)}
 .infra-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.09)}
-.infra-icon{
-  width:40px;height:40px;border-radius:10px;
-  background:rgba(200,144,30,.12);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;flex-shrink:0;
-}
+.infra-icon{width:40px;height:40px;border-radius:10px;background:rgba(200,144,30,.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 .infra-card h3{font-size:.86rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
 .infra-card p{font-size:.7rem;color:var(--muted);line-height:1.65}
 
 /* Eligibility */
 .eligibility-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-.elig-card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:14px;padding:1.3rem 1.2rem;
-}
-.elig-card h3{
-  font-family:var(--font-display);
-  font-size:1rem;font-weight:700;color:var(--gold2);margin-bottom:.7rem;
-}
+.elig-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.3rem 1.2rem}
+.elig-card h3{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--gold2);margin-bottom:.7rem}
 .elig-list{list-style:none}
-.elig-list li{
-  font-size:.72rem;color:rgba(255,255,255,.62);line-height:1.65;
-  padding:.2rem 0 .2rem 1.2rem;position:relative;
-}
-.elig-list li::before{
-  content:'›';position:absolute;left:0;color:var(--gold2);font-weight:700;
-}
+.elig-list li{font-size:.72rem;color:rgba(255,255,255,.62);line-height:1.65;padding:.2rem 0 .2rem 1.2rem;position:relative}
+.elig-list li::before{content:'›';position:absolute;left:0;color:var(--gold2);font-weight:700}
 
 /* ══ FAQ SECTION ══ */
 .faq-section{background:#fff}
 .faq-grid{display:flex;flex-direction:column;gap:.75rem;max-width:780px;margin:0 auto}
-.faq-item{
-  background:var(--cream);
-  border:1px solid var(--cream2);
-  border-radius:12px;
-  overflow:hidden;
-}
-.faq-q{
-  width:100%;background:none;border:none;
-  padding:1rem 1.2rem;
-  display:flex;justify-content:space-between;align-items:center;
-  cursor:pointer;text-align:left;gap:1rem;
-}
+.faq-item{background:var(--cream);border:1px solid var(--cream2);border-radius:12px;overflow:hidden}
+.faq-q{width:100%;background:none;border:none;padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:1rem}
 .faq-q-text{font-size:.85rem;font-weight:700;color:var(--text);line-height:1.4}
-.faq-icon{
-  font-size:1.1rem;color:var(--gold);flex-shrink:0;
-  transition:transform .25s;font-weight:400;
-}
+.faq-icon{font-size:1.1rem;color:var(--gold);flex-shrink:0;transition:transform .25s;font-weight:400}
 .faq-item.open .faq-icon{transform:rotate(45deg)}
-.faq-a{
-  max-height:0;overflow:hidden;
-  transition:max-height .3s ease,padding .3s ease;
-  font-size:.78rem;color:var(--muted);line-height:1.75;
-  padding:0 1.2rem;
-}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;font-size:.78rem;color:var(--muted);line-height:1.75;padding:0 1.2rem}
 .faq-item.open .faq-a{max-height:300px;padding:.25rem 1.2rem 1rem}
 
 /* ══ GALLERY ══ */
-.gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1rem;
-}
-.gallery-item{
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,.1);
-  transition:transform .35s ease,box-shadow .35s ease;
-  aspect-ratio:1/1;
-  position:relative;
-  background:var(--cream2);
-  cursor:pointer;
-}
-.gallery-item:hover{
-  transform:translateY(-8px) scale(1.03);
-  box-shadow:0 18px 48px rgba(0,0,0,.2);
-}
-.gallery-item img{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .5s ease;
-}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.gallery-item{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.1);transition:transform .35s ease,box-shadow .35s ease;aspect-ratio:1/1;position:relative;background:var(--cream2);cursor:pointer}
+.gallery-item:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 18px 48px rgba(0,0,0,.2)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .gallery-item:hover img{transform:scale(1.07)}
-.gallery-item-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(6,14,30,.7) 0%,transparent 60%);
-  opacity:0;
-  transition:opacity .35s ease;
-  display:flex;align-items:flex-end;
-  padding:.9rem 1rem;
-}
+.gallery-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,14,30,.7) 0%,transparent 60%);opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-end;padding:.9rem 1rem}
 .gallery-item:hover .gallery-item-overlay{opacity:1}
-.gallery-item-label{
-  font-size:.62rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--gold3);
-}
+.gallery-item-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold3)}
 
 /* Lightbox */
-.lightbox{
-  display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(6,14,30,.95);
-  align-items:center;justify-content:center;
-  padding:1rem;
-}
+.lightbox{display:none;position:fixed;inset:0;z-index:500;background:rgba(6,14,30,.95);align-items:center;justify-content:center;padding:1rem}
 .lightbox.open{display:flex;animation:lbIn .25s ease}
 @keyframes lbIn{from{opacity:0}to{opacity:1}}
-.lightbox-img{
-  max-width:90vw;max-height:88vh;
-  border-radius:14px;
-  box-shadow:0 30px 80px rgba(0,0,0,.7);
-  object-fit:contain;
-  display:block;
-}
-.lightbox-close{
-  position:fixed;top:1.2rem;right:1.4rem;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
-  color:#fff;font-size:1.4rem;
-  width:42px;height:42px;border-radius:50%;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s;
-}
+.lightbox-img{max-width:90vw;max-height:88vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.7);object-fit:contain;display:block}
+.lightbox-close{position:fixed;top:1.2rem;right:1.4rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.4rem;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .lightbox-close:hover{background:rgba(255,255,255,.2)}
 
 /* CTA */
-.cta-section{
-  background:radial-gradient(ellipse at 50% 0%,#1c3368 0%,var(--navy2) 70%);
-  padding:clamp(3rem,6vw,5.5rem) clamp(1rem,4vw,2.5rem);
-  text-align:center;position:relative;overflow:hidden;
-}
-.cta-section::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:
-    radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,.35) 0%,transparent 100%),
-    radial-gradient(1px 1px at 72% 22%, rgba(255,255,255,.28) 0%,transparent 100%),
-    radial-gradient(1.5px 1.5px at 52% 72%, rgba(255,255,255,.42) 0%,transparent 100%);
-}
-.cta-section h2{
-  font-family:var(--font-display);
-  font-size:clamp(1.8rem,4vw,2.9rem);font-weight:700;
-  color:#fff;margin-bottom:1rem;position:relative;
-}
-.cta-section p{
-  color:rgba(255,255,255,.52);font-size:clamp(.78rem,.9vw,.9rem);font-weight:400;
-  max-width:480px;margin:0 auto 2rem;line-height:1.8;position:relative;
-}
-.btn-cta{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#fff;text-decoration:none;border:none;
-  padding:.88rem 2.2rem;border-radius:8px;
-  font-family:var(--font-body);font-size:.76rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;position:relative;
-  transition:opacity .2s,transform .15s,box-shadow .2s;
-  box-shadow:0 6px 26px rgba(200,144,30,.48);
-}
+.cta-section{background:radial-gradient(ellipse at 50% 0%,#1c3368 0%,var(--navy2) 70%);padding:clamp(3rem,6vw,5.5rem) clamp(1rem,4vw,2.5rem);text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,.35) 0%,transparent 100%),radial-gradient(1px 1px at 72% 22%, rgba(255,255,255,.28) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 52% 72%, rgba(255,255,255,.42) 0%,transparent 100%)}
+.cta-section h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.9rem);font-weight:700;color:#fff;margin-bottom:1rem;position:relative}
+.cta-section p{color:rgba(255,255,255,.52);font-size:clamp(.78rem,.9vw,.9rem);font-weight:400;max-width:480px;margin:0 auto 2rem;line-height:1.8;position:relative}
+.btn-cta{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;text-decoration:none;border:none;padding:.88rem 2.2rem;border-radius:8px;font-family:var(--font-body);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;position:relative;transition:opacity .2s,transform .15s,box-shadow .2s;box-shadow:0 6px 26px rgba(200,144,30,.48)}
 .btn-cta:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 10px 34px rgba(232,170,58,.56)}
 
 /* ══ FOOTER ══ */
 footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 1.5rem}
 .footer-inner{max-width:1100px;margin:0 auto}
-.footer-top{
-  display:flex;flex-direction:column;align-items:center;
-  text-align:center;margin-bottom:2.5rem;
+.footer-top{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:2.5rem}
+
+/* Footer logo — white circle background */
+.footer-logo-wrap{
+  width:90px;height:90px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.9rem;
+  border:2px solid rgba(200,144,30,.35);
+  box-shadow:0 4px 20px rgba(200,144,30,.25);
+  overflow:hidden;
 }
-.footer-logo{width:80px;height:auto;margin-bottom:.9rem;filter:drop-shadow(0 4px 12px rgba(200,144,30,.3))}
+.footer-logo{width:80px;height:80px;object-fit:contain;display:block;filter:drop-shadow(0 2px 6px rgba(200,144,30,.3))}
+
 .footer-name{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.3rem}
 .footer-tagline{font-size:.74rem;font-weight:400;color:rgba(255,255,255,.35);max-width:520px;line-height:1.8}
-.footer-cols{
-  display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);
-}
-.footer-col-title{
-  font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold2);margin-bottom:.9rem;
-}
+.footer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.06)}
+.footer-col-title{font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:.9rem}
 .footer-links{list-style:none;display:flex;flex-direction:column;gap:.45rem}
 .footer-links a{color:rgba(255,255,255,.4);text-decoration:none;font-size:.75rem;font-weight:500;transition:color .2s}
 .footer-links a:hover{color:var(--gold2)}
-.footer-contact-list{
-  list-style:none;display:flex;flex-direction:column;gap:.5rem;
-  font-size:.74rem;font-weight:400;color:rgba(255,255,255,.4);line-height:1.7;
-}
-.footer-bottom{
-  margin-top:2rem;padding-top:1.2rem;
-  border-top:1px solid rgba(255,255,255,.04);
-  text-align:center;font-size:.66rem;color:rgba(255,255,255,.22);
-}
+.footer-contact-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;font-size:.74rem;font-weight:400;color:rgba(255,255,255,.4);line-height:1.7}
+.footer-bottom{margin-top:2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.04);text-align:center;font-size:.66rem;color:rgba(255,255,255,.22)}
 .footer-bottom a{color:rgba(255,255,255,.22);text-decoration:none}
 
 /* ══ RESPONSIVE ══ */
@@ -970,7 +830,9 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
 <!-- ══ NAVBAR ══ -->
 <nav>
   <a href="#home" class="nav-brand" aria-label="Starex University Home">
-    <img src="seulogo.png" alt="Starex University Logo — UGC Approved University Gurugram" width="38" height="38"/>
+    <div class="nav-logo-wrap">
+      <img src="seulogo.png" alt="Starex University Logo — UGC Approved University Gurugram" width="34" height="34"/>
+    </div>
     <span class="nav-brand-name">Starex University</span>
   </a>
   <ul class="nav-links" role="list">
@@ -1009,13 +871,14 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
   <!-- HERO -->
   <section class="hero" aria-labelledby="heroHeading">
     <div class="hero-logo-wrap" aria-hidden="true">
-      <img src="seulogo.png" alt="" class="hero-logo" width="100" height="100"/>
+      <div class="hero-logo-circle">
+        <img src="seulogo.png" alt="" class="hero-logo" width="99" height="99"/>
+      </div>
     </div>
     <div class="hero-badge" role="status">
       <span class="badge-dot" aria-hidden="true"></span>
       Admissions Open — 2026–27
     </div>
-    <!-- SEO: Single H1 with primary keyword -->
     <h1 id="heroHeading">Starex University Gurugram — <em>UGC Approved</em><br/>Shape Your Future with Excellence</h1>
     <p class="hero-sub">UGC Approved University in Gurugram, Haryana &nbsp;|&nbsp; 50+ Programs &nbsp;|&nbsp; 95% Placement Rate</p>
     <div class="hero-divider" aria-hidden="true"></div>
@@ -1318,18 +1181,10 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
   <h2 class="scroll-band-title">Life at <em>Starex</em></h2>
   <div class="marquee-viewport" role="region" aria-label="Scrolling university campus posters">
     <div class="marquee-track" id="marqueeTrack">
-      <img src="https://i.ibb.co/MDf7XVCc/WESBITE-IMAGES.png"
-           alt="Starex University modern campus buildings and classrooms — Gurugram Haryana"
-           class="marquee-img" loading="lazy" width="380" height="380"/>
-      <img src="https://i.ibb.co/27Nd12fz/WESBITE-IMAGES-3.png"
-           alt="Starex University student events cultural activities and campus life"
-           class="marquee-img" loading="lazy" width="380" height="380"/>
-      <img src="https://i.ibb.co/MDf7XVCc/WESBITE-IMAGES.png"
-           alt="Starex University modern campus buildings and classrooms — Gurugram Haryana"
-           class="marquee-img" loading="lazy" width="380" height="380" aria-hidden="true"/>
-      <img src="https://i.ibb.co/27Nd12fz/WESBITE-IMAGES-3.png"
-           alt="Starex University student events cultural activities and campus life"
-           class="marquee-img" loading="lazy" width="380" height="380" aria-hidden="true"/>
+      <img src="https://i.ibb.co/MDf7XVCc/WESBITE-IMAGES.png" alt="Starex University modern campus buildings and classrooms — Gurugram Haryana" class="marquee-img" loading="lazy" width="380" height="380"/>
+      <img src="https://i.ibb.co/27Nd12fz/WESBITE-IMAGES-3.png" alt="Starex University student events cultural activities and campus life" class="marquee-img" loading="lazy" width="380" height="380"/>
+      <img src="https://i.ibb.co/MDf7XVCc/WESBITE-IMAGES.png" alt="Starex University modern campus buildings and classrooms — Gurugram Haryana" class="marquee-img" loading="lazy" width="380" height="380" aria-hidden="true"/>
+      <img src="https://i.ibb.co/27Nd12fz/WESBITE-IMAGES-3.png" alt="Starex University student events cultural activities and campus life" class="marquee-img" loading="lazy" width="380" height="380" aria-hidden="true"/>
     </div>
   </div>
   <div class="carousel-dots" aria-hidden="true">
@@ -1344,26 +1199,10 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
     <div class="sec-label">By the Numbers</div>
     <h2 class="sec-title">Why Choose Starex University, Gurugram?</h2>
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-num">25+</div>
-        <div class="stat-lbl">Years of Excellence</div>
-        <div class="stat-desc">Decades of academic leadership and industry trust in Haryana.</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">50+</div>
-        <div class="stat-lbl">Programs Offered</div>
-        <div class="stat-desc">UG, PG, Diploma, and Doctoral programs across disciplines.</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">10K+</div>
-        <div class="stat-lbl">Alumni Worldwide</div>
-        <div class="stat-desc">Graduates thriving in top organisations across the globe.</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">95%</div>
-        <div class="stat-lbl">Placement Rate</div>
-        <div class="stat-desc">500+ recruiting companies · Average package 5.8 LPA.</div>
-      </div>
+      <div class="stat-card"><div class="stat-num">25+</div><div class="stat-lbl">Years of Excellence</div><div class="stat-desc">Decades of academic leadership and industry trust in Haryana.</div></div>
+      <div class="stat-card"><div class="stat-num">50+</div><div class="stat-lbl">Programs Offered</div><div class="stat-desc">UG, PG, Diploma, and Doctoral programs across disciplines.</div></div>
+      <div class="stat-card"><div class="stat-num">10K+</div><div class="stat-lbl">Alumni Worldwide</div><div class="stat-desc">Graduates thriving in top organisations across the globe.</div></div>
+      <div class="stat-card"><div class="stat-num">95%</div><div class="stat-lbl">Placement Rate</div><div class="stat-desc">500+ recruiting companies · Average package 5.8 LPA.</div></div>
     </div>
   </div>
 </div>
@@ -1374,42 +1213,12 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
     <div class="sec-label">Academic Offerings</div>
     <h2 class="sec-title">Explore Our Programs at Starex University</h2>
     <div class="programs-grid">
-      <div class="prog-card">
-        <span class="prog-icon" aria-hidden="true">⚙️</span>
-        <h3>Engineering &amp; Technology — B.Tech / M.Tech</h3>
-        <p>B.Tech in CSE, Civil, Mechanical &amp; ECE · M.Tech in various specialisations · Ph.D. JEE Mains accepted. 95% placement record.</p>
-        <span class="prog-duration">4 Years UG · 2 Years PG</span>
-      </div>
-      <div class="prog-card">
-        <span class="prog-icon" aria-hidden="true">💼</span>
-        <h3>Management — MBA / BBA</h3>
-        <p>MBA · BBA · Executive MBA · Ph.D in Management — industry-integrated curriculum. CAT / MAT / CMAT scores considered.</p>
-        <span class="prog-duration">2 Years MBA · 3 Years BBA</span>
-      </div>
-      <div class="prog-card">
-        <span class="prog-icon" aria-hidden="true">⚖️</span>
-        <h3>Law — LLB &amp; LLM</h3>
-        <p>LLB 5-Year Integrated (BA / BBA + LLB) · LLB 3-Year after graduation · LLM. CLAT / LSAT scores advantageous.</p>
-        <span class="prog-duration">3–5 Years</span>
-      </div>
-      <div class="prog-card">
-        <span class="prog-icon" aria-hidden="true">💊</span>
-        <h3>Pharmacy — B.Pharma / M.Pharma</h3>
-        <p>B.Pharma · M.Pharma · D.Pharma — state-of-the-art pharmaceutical labs. Strong industry tie-ups for placements.</p>
-        <span class="prog-duration">1–4 Years</span>
-      </div>
-      <div class="prog-card">
-        <span class="prog-icon" aria-hidden="true">🎓</span>
-        <h3>Arts &amp; Science — BA / B.Sc</h3>
-        <p>BA · B.Sc · MA · M.Sc with a wide range of specialisations and elective subjects across humanities and sciences.</p>
-        <span class="prog-duration">3–5 Years</span>
-      </div>
-      <div class="prog-card">
-        <span class="prog-icon" aria-hidden="true">🔬</span>
-        <h3>Research &amp; Ph.D Programs</h3>
-        <p>Doctoral programs across all schools with dedicated research centres, experienced guides, and publication support.</p>
-        <span class="prog-duration">3–5 Years</span>
-      </div>
+      <div class="prog-card"><span class="prog-icon" aria-hidden="true">⚙️</span><h3>Engineering &amp; Technology — B.Tech / M.Tech</h3><p>B.Tech in CSE, Civil, Mechanical &amp; ECE · M.Tech in various specialisations · Ph.D. JEE Mains accepted. 95% placement record.</p><span class="prog-duration">4 Years UG · 2 Years PG</span></div>
+      <div class="prog-card"><span class="prog-icon" aria-hidden="true">💼</span><h3>Management — MBA / BBA</h3><p>MBA · BBA · Executive MBA · Ph.D in Management — industry-integrated curriculum. CAT / MAT / CMAT scores considered.</p><span class="prog-duration">2 Years MBA · 3 Years BBA</span></div>
+      <div class="prog-card"><span class="prog-icon" aria-hidden="true">⚖️</span><h3>Law — LLB &amp; LLM</h3><p>LLB 5-Year Integrated (BA / BBA + LLB) · LLB 3-Year after graduation · LLM. CLAT / LSAT scores advantageous.</p><span class="prog-duration">3–5 Years</span></div>
+      <div class="prog-card"><span class="prog-icon" aria-hidden="true">💊</span><h3>Pharmacy — B.Pharma / M.Pharma</h3><p>B.Pharma · M.Pharma · D.Pharma — state-of-the-art pharmaceutical labs. Strong industry tie-ups for placements.</p><span class="prog-duration">1–4 Years</span></div>
+      <div class="prog-card"><span class="prog-icon" aria-hidden="true">🎓</span><h3>Arts &amp; Science — BA / B.Sc</h3><p>BA · B.Sc · MA · M.Sc with a wide range of specialisations and elective subjects across humanities and sciences.</p><span class="prog-duration">3–5 Years</span></div>
+      <div class="prog-card"><span class="prog-icon" aria-hidden="true">🔬</span><h3>Research &amp; Ph.D Programs</h3><p>Doctoral programs across all schools with dedicated research centres, experienced guides, and publication support.</p><span class="prog-duration">3–5 Years</span></div>
     </div>
   </div>
 </div>
@@ -1420,42 +1229,10 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
     <div class="sec-label" style="color:var(--gold2)">Admissions Criteria</div>
     <h2 class="sec-title light">Eligibility at a Glance — Admissions 2026–27</h2>
     <div class="eligibility-grid">
-      <div class="elig-card">
-        <h3>Engineering — B.Tech Admission Gurugram</h3>
-        <ul class="elig-list">
-          <li>10+2 with Physics, Chemistry &amp; Maths (PCM)</li>
-          <li>Minimum 45% aggregate marks (40% for SC/ST)</li>
-          <li>JEE Mains score preferred (not mandatory)</li>
-          <li>Lateral entry available for Diploma holders</li>
-        </ul>
-      </div>
-      <div class="elig-card">
-        <h3>Management — MBA / BBA College Gurugram</h3>
-        <ul class="elig-list">
-          <li>MBA: Any graduation with min 50% marks</li>
-          <li>CAT / MAT / CMAT score considered</li>
-          <li>BBA: 10+2 in any stream with 45% marks</li>
-          <li>Executive MBA: 2+ years work experience</li>
-        </ul>
-      </div>
-      <div class="elig-card">
-        <h3>Law — LLB Admission Gurugram</h3>
-        <ul class="elig-list">
-          <li>5-Yr Integrated: 10+2 with min 45% (any stream)</li>
-          <li>3-Yr LLB: Graduation with min 45% marks</li>
-          <li>LLM: LLB degree with min 55% marks</li>
-          <li>CLAT / LSAT score advantageous</li>
-        </ul>
-      </div>
-      <div class="elig-card">
-        <h3>Pharmacy &amp; Arts / Science Admission</h3>
-        <ul class="elig-list">
-          <li>B.Pharma: 10+2 with PCB/PCM, min 45%</li>
-          <li>D.Pharma: 10+2 with Science, min 45%</li>
-          <li>Arts / Science: 10+2 in relevant stream</li>
-          <li>Ph.D: PG with min 55% + entrance test</li>
-        </ul>
-      </div>
+      <div class="elig-card"><h3>Engineering — B.Tech Admission Gurugram</h3><ul class="elig-list"><li>10+2 with Physics, Chemistry &amp; Maths (PCM)</li><li>Minimum 45% aggregate marks (40% for SC/ST)</li><li>JEE Mains score preferred (not mandatory)</li><li>Lateral entry available for Diploma holders</li></ul></div>
+      <div class="elig-card"><h3>Management — MBA / BBA College Gurugram</h3><ul class="elig-list"><li>MBA: Any graduation with min 50% marks</li><li>CAT / MAT / CMAT score considered</li><li>BBA: 10+2 in any stream with 45% marks</li><li>Executive MBA: 2+ years work experience</li></ul></div>
+      <div class="elig-card"><h3>Law — LLB Admission Gurugram</h3><ul class="elig-list"><li>5-Yr Integrated: 10+2 with min 45% (any stream)</li><li>3-Yr LLB: Graduation with min 45% marks</li><li>LLM: LLB degree with min 55% marks</li><li>CLAT / LSAT score advantageous</li></ul></div>
+      <div class="elig-card"><h3>Pharmacy &amp; Arts / Science Admission</h3><ul class="elig-list"><li>B.Pharma: 10+2 with PCB/PCM, min 45%</li><li>D.Pharma: 10+2 with Science, min 45%</li><li>Arts / Science: 10+2 in relevant stream</li><li>Ph.D: PG with min 55% + entrance test</li></ul></div>
     </div>
   </div>
 </div>
@@ -1466,115 +1243,29 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
     <div class="sec-label">Campus Life &amp; Facilities</div>
     <h2 class="sec-title">World-Class Infrastructure at Starex University</h2>
     <div class="infra-grid">
-      <div class="infra-card">
-        <div class="infra-icon" aria-hidden="true">🏛️</div>
-        <div>
-          <h3>Modern Campus in Gurugram</h3>
-          <p>Sprawling green campus with state-of-the-art classrooms, advanced labs, and research centres on NH-48, Gurugram, Haryana.</p>
-        </div>
-      </div>
-      <div class="infra-card">
-        <div class="infra-icon" aria-hidden="true">🤝</div>
-        <div>
-          <h3>Placement Cell — 95% Record</h3>
-          <p>Dedicated Training &amp; Placement cell with 500+ company tie-ups for internships and final placements across sectors.</p>
-        </div>
-      </div>
-      <div class="infra-card">
-        <div class="infra-icon" aria-hidden="true">🌏</div>
-        <div>
-          <h3>International Exposure</h3>
-          <p>MoUs with global universities, student exchange programs, and international faculty visits every semester.</p>
-        </div>
-      </div>
-      <div class="infra-card">
-        <div class="infra-icon" aria-hidden="true">🏠</div>
-        <div>
-          <h3>Hostel &amp; Amenities</h3>
-          <p>Separate boys' &amp; girls' hostels with 24/7 security, cafeteria, sports complex, gymnasium, and medical facility.</p>
-        </div>
-      </div>
-      <div class="infra-card">
-        <div class="infra-icon" aria-hidden="true">📚</div>
-        <div>
-          <h3>Digital Library</h3>
-          <p>50,000+ books, e-journals, research databases, and 24/7 online access for every enrolled student.</p>
-        </div>
-      </div>
-      <div class="infra-card">
-        <div class="infra-icon" aria-hidden="true">🎓</div>
-        <div>
-          <h3>Scholarship Programs</h3>
-          <p>Merit-based, need-based, and sports scholarships available — up to 100% tuition fee waiver for deserving students.</p>
-        </div>
-      </div>
+      <div class="infra-card"><div class="infra-icon" aria-hidden="true">🏛️</div><div><h3>Modern Campus in Gurugram</h3><p>Sprawling green campus with state-of-the-art classrooms, advanced labs, and research centres on NH-48, Gurugram, Haryana.</p></div></div>
+      <div class="infra-card"><div class="infra-icon" aria-hidden="true">🤝</div><div><h3>Placement Cell — 95% Record</h3><p>Dedicated Training &amp; Placement cell with 500+ company tie-ups for internships and final placements across sectors.</p></div></div>
+      <div class="infra-card"><div class="infra-icon" aria-hidden="true">🌏</div><div><h3>International Exposure</h3><p>MoUs with global universities, student exchange programs, and international faculty visits every semester.</p></div></div>
+      <div class="infra-card"><div class="infra-icon" aria-hidden="true">🏠</div><div><h3>Hostel &amp; Amenities</h3><p>Separate boys' &amp; girls' hostels with 24/7 security, cafeteria, sports complex, gymnasium, and medical facility.</p></div></div>
+      <div class="infra-card"><div class="infra-icon" aria-hidden="true">📚</div><div><h3>Digital Library</h3><p>50,000+ books, e-journals, research databases, and 24/7 online access for every enrolled student.</p></div></div>
+      <div class="infra-card"><div class="infra-icon" aria-hidden="true">🎓</div><div><h3>Scholarship Programs</h3><p>Merit-based, need-based, and sports scholarships available — up to 100% tuition fee waiver for deserving students.</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- FAQ SECTION — targets People Also Ask / Featured Snippets -->
+<!-- FAQ -->
 <div class="faq-section" id="faq">
   <div class="section">
     <div class="sec-label">Frequently Asked Questions</div>
     <h2 class="sec-title">Common Questions About Starex University Admissions</h2>
     <div class="faq-grid">
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-          <span class="faq-q-text">Is Starex University UGC approved?</span>
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a">Yes. Starex University is fully approved by the University Grants Commission (UGC), Government of India. It is located in Gurugram, Haryana and has been offering quality, recognised education since 2010. All degrees from Starex University are valid and recognised across India.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-          <span class="faq-q-text">What is the placement rate at Starex University?</span>
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a">Starex University maintains a 95% campus placement rate through its dedicated Training &amp; Placement (T&amp;P) cell. Over 500 companies actively recruit from the campus, including top firms from engineering, management, law, and pharmaceutical sectors. The average placement package is 5.8 LPA.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-          <span class="faq-q-text">What programs does Starex University offer?</span>
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a">Starex University offers 50+ programs including B.Tech (CSE, Civil, Mechanical, ECE), M.Tech, MBA, BBA, Executive MBA, LLB 5-Year Integrated, LLB 3-Year, LLM, B.Pharma, M.Pharma, D.Pharma, BA, B.Sc, MA, M.Sc, and Ph.D programs across all disciplines.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-          <span class="faq-q-text">Where is Starex University located?</span>
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a">Starex University is located at NH-48 (Delhi–Jaipur Highway), Binola, Gurugram, Haryana – 122413, India. The campus is easily accessible from Delhi NCR and is well connected by road. It is approximately 30–40 km from central Delhi.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-          <span class="faq-q-text">How to apply to Starex University for 2026-27?</span>
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a">Apply online at starexofficial.university — the 3-step form takes less than 3 minutes. Fill in your personal details, select your program, and submit. The admissions team will contact you within 24–48 hours. You can also call +91-73311-12501 or email starexuniversityofficial@gmail.com for direct assistance.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-          <span class="faq-q-text">Does Starex University have hostel facilities?</span>
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a">Yes. Starex University provides separate hostel facilities for boys and girls with 24/7 security, a cafeteria, sports complex, gymnasium, and an on-campus medical facility. Both hostels are located within the main campus in Gurugram, Haryana.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-          <span class="faq-q-text">What is the eligibility for B.Tech at Starex University?</span>
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a">For B.Tech admission: 10+2 with Physics, Chemistry &amp; Maths (PCM), minimum 45% aggregate marks (40% for SC/ST candidates). JEE Mains score is preferred but not mandatory. Lateral entry is available for Diploma (Polytechnic) holders directly into 2nd year.</div>
-      </div>
-
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span class="faq-q-text">Is Starex University UGC approved?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Yes. Starex University is fully approved by the University Grants Commission (UGC), Government of India. It is located in Gurugram, Haryana and has been offering quality, recognised education since 2010. All degrees from Starex University are valid and recognised across India.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span class="faq-q-text">What is the placement rate at Starex University?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Starex University maintains a 95% campus placement rate through its dedicated Training &amp; Placement (T&amp;P) cell. Over 500 companies actively recruit from the campus, including top firms from engineering, management, law, and pharmaceutical sectors. The average placement package is 5.8 LPA.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span class="faq-q-text">What programs does Starex University offer?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Starex University offers 50+ programs including B.Tech (CSE, Civil, Mechanical, ECE), M.Tech, MBA, BBA, Executive MBA, LLB 5-Year Integrated, LLB 3-Year, LLM, B.Pharma, M.Pharma, D.Pharma, BA, B.Sc, MA, M.Sc, and Ph.D programs across all disciplines.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span class="faq-q-text">Where is Starex University located?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Starex University is located at NH-48 (Delhi–Jaipur Highway), Binola, Gurugram, Haryana – 122413, India. The campus is easily accessible from Delhi NCR and is well connected by road. It is approximately 30–40 km from central Delhi.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span class="faq-q-text">How to apply to Starex University for 2026-27?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Apply online at starexofficial.university — the 3-step form takes less than 3 minutes. Fill in your personal details, select your program, and submit. The admissions team will contact you within 24–48 hours. You can also call +91-73311-12501 or email starexuniversityofficial@gmail.com for direct assistance.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span class="faq-q-text">Does Starex University have hostel facilities?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Yes. Starex University provides separate hostel facilities for boys and girls with 24/7 security, a cafeteria, sports complex, gymnasium, and an on-campus medical facility. Both hostels are located within the main campus in Gurugram, Haryana.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span class="faq-q-text">What is the eligibility for B.Tech at Starex University?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">For B.Tech admission: 10+2 with Physics, Chemistry &amp; Maths (PCM), minimum 45% aggregate marks (40% for SC/ST candidates). JEE Mains score is preferred but not mandatory. Lateral entry is available for Diploma (Polytechnic) holders directly into 2nd year.</div></div>
     </div>
   </div>
 </div>
@@ -1585,41 +1276,16 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
     <div class="sec-label">Campus &amp; Events</div>
     <h2 class="sec-title">Starex University Gallery</h2>
     <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/ksn8JYDB/STAREX-UNIV-INSTA-POST-2.png','Starex University placement drive — top companies recruiting from campus Gurugram')"
-           role="button" tabindex="0" aria-label="View: Starex University placement and campus highlights"
-           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
-        <img src="https://i.ibb.co/ksn8JYDB/STAREX-UNIV-INSTA-POST-2.png"
-             alt="Starex University placement drive — top companies recruiting students from Gurugram campus" loading="lazy" width="400" height="400"/>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/FqBHygfT/STAREX-UNIV-INSTA-POST-1.png','Starex University admissions 2026-27 open — B.Tech MBA LLB Pharmacy')"
-           role="button" tabindex="0" aria-label="View: Starex University admissions 2026-27"
-           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
-        <img src="https://i.ibb.co/FqBHygfT/STAREX-UNIV-INSTA-POST-1.png"
-             alt="Starex University admissions 2026-27 open — apply for B.Tech MBA LLB Pharmacy in Gurugram" loading="lazy" width="400" height="400"/>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/9kQpLb1G/STAREX-UNIV-INSTA-POST-5.png','Starex University campus life — student activities sports facilities Gurugram')"
-           role="button" tabindex="0" aria-label="View: Starex University student life and sports"
-           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
-        <img src="https://i.ibb.co/9kQpLb1G/STAREX-UNIV-INSTA-POST-5.png"
-             alt="Starex University campus life — student activities hostel sports facilities Haryana" loading="lazy" width="400" height="400"/>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/1JXPdG3B/STAREX-UNIV-INSTA-POST-4.png','Starex University academic programs — 50+ courses UGC approved Gurugram')"
-           role="button" tabindex="0" aria-label="View: Starex University academic programs overview"
-           onkeydown="if(event.key==='Enter'||event.key===' ')this.click()">
-        <img src="https://i.ibb.co/1JXPdG3B/STAREX-UNIV-INSTA-POST-4.png"
-             alt="Starex University 50+ academic programs — UGC approved degrees Gurugram Haryana" loading="lazy" width="400" height="400"/>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div>
-      </div>
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/ksn8JYDB/STAREX-UNIV-INSTA-POST-2.png','Starex University placement drive')" role="button" tabindex="0" aria-label="View: Starex University placement and campus highlights" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()"><img src="https://i.ibb.co/ksn8JYDB/STAREX-UNIV-INSTA-POST-2.png" alt="Starex University placement drive — top companies recruiting students from Gurugram campus" loading="lazy" width="400" height="400"/><div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div></div>
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/FqBHygfT/STAREX-UNIV-INSTA-POST-1.png','Starex University admissions 2026-27')" role="button" tabindex="0" aria-label="View: Starex University admissions 2026-27" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()"><img src="https://i.ibb.co/FqBHygfT/STAREX-UNIV-INSTA-POST-1.png" alt="Starex University admissions 2026-27 open — apply for B.Tech MBA LLB Pharmacy in Gurugram" loading="lazy" width="400" height="400"/><div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div></div>
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/9kQpLb1G/STAREX-UNIV-INSTA-POST-5.png','Starex University campus life')" role="button" tabindex="0" aria-label="View: Starex University student life and sports" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()"><img src="https://i.ibb.co/9kQpLb1G/STAREX-UNIV-INSTA-POST-5.png" alt="Starex University campus life — student activities hostel sports facilities Haryana" loading="lazy" width="400" height="400"/><div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div></div>
+      <div class="gallery-item" onclick="openLightbox('https://i.ibb.co/1JXPdG3B/STAREX-UNIV-INSTA-POST-4.png','Starex University academic programs')" role="button" tabindex="0" aria-label="View: Starex University academic programs overview" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()"><img src="https://i.ibb.co/1JXPdG3B/STAREX-UNIV-INSTA-POST-4.png" alt="Starex University 50+ academic programs — UGC approved degrees Gurugram Haryana" loading="lazy" width="400" height="400"/><div class="gallery-item-overlay"><span class="gallery-item-label">View Full</span></div></div>
     </div>
   </div>
 </div>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer"
-     onclick="closeLightbox(event)">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" onclick="closeLightbox(event)">
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close image viewer">✕</button>
   <img src="" alt="" class="lightbox-img" id="lightboxImg"/>
 </div>
@@ -1635,12 +1301,11 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <img src="seulogo.png" alt="Starex University Logo — UGC Approved Gurugram" class="footer-logo" width="80" height="80"/>
+      <div class="footer-logo-wrap">
+        <img src="seulogo.png" alt="Starex University Logo — UGC Approved Gurugram" class="footer-logo" width="80" height="80"/>
+      </div>
       <div class="footer-name">Starex University</div>
-      <p class="footer-tagline">
-        Starex University is a UGC-approved institution in Gurugram, Haryana committed to quality education,
-        innovation, industry readiness, and holistic student development since 2010.
-      </p>
+      <p class="footer-tagline">Starex University is a UGC-approved institution in Gurugram, Haryana committed to quality education, innovation, industry readiness, and holistic student development since 2010.</p>
     </div>
     <div class="footer-cols">
       <div>
@@ -1685,141 +1350,30 @@ footer{background:#04090f;padding:clamp(2.5rem,4vw,4rem) clamp(1rem,4vw,2.5rem) 
 </footer>
 
 <script>
-function sanitize(str){
-  if(typeof str!=='string')return'';
-  return str.replace(/[<>'"&]/g,function(c){return{'<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;','&':'&amp;'}[c];}).trim().slice(0,500);
-}
-function genRef(){
-  var arr=new Uint32Array(1);window.crypto.getRandomValues(arr);
-  return'SU-'+(new Date().getFullYear())+'-'+(10000+(arr[0]%90000));
-}
-
-/* NAV */
+function sanitize(str){if(typeof str!=='string')return'';return str.replace(/[<>'"&]/g,function(c){return{'<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;','&':'&amp;'}[c];}).trim().slice(0,500);}
+function genRef(){var arr=new Uint32Array(1);window.crypto.getRandomValues(arr);return'SU-'+(new Date().getFullYear())+'-'+(10000+(arr[0]%90000));}
 var menuBtn=document.getElementById('menuBtn'),menuClose=document.getElementById('menuClose'),mobileMenu=document.getElementById('mobileMenu');
 menuBtn.addEventListener('click',function(){mobileMenu.classList.add('open');menuBtn.setAttribute('aria-expanded','true');});
 menuBtn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click();}});
 menuClose.addEventListener('click',closeMobileMenu);
 function closeMobileMenu(){mobileMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}
-
-/* FAQ */
-function toggleFaq(btn){
-  var item=btn.closest('.faq-item');
-  var isOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-q').setAttribute('aria-expanded','false');});
-  if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}
-}
-
-/* STEPS */
-function setStep(n){
-  document.querySelectorAll('.form-step').forEach(function(s){s.classList.remove('active');});
-  var t=document.getElementById('step'+n);if(t)t.classList.add('active');
-  for(var i=1;i<=3;i++){
-    var c=document.getElementById('sc'+i),l=document.getElementById('sl'+i);
-    c.classList.remove('active','done');l.classList.remove('active');c.removeAttribute('aria-current');
-    if(i<n){c.classList.add('done');c.textContent='✓';}
-    else if(i===n){c.classList.add('active');c.setAttribute('aria-current','step');c.textContent=i;l.classList.add('active');}
-    else{c.textContent=i;}
-  }
-  for(var j=1;j<=2;j++){document.getElementById('conn'+j).classList.toggle('done',n>j);}
-  document.getElementById('stepProgress').setAttribute('aria-valuenow',n);
-  if(window.innerWidth<640){document.getElementById('apply').scrollIntoView({behavior:'smooth',block:'start'});}
-}
-
+function toggleFaq(btn){var item=btn.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-q').setAttribute('aria-expanded','false');});if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}}
+function setStep(n){document.querySelectorAll('.form-step').forEach(function(s){s.classList.remove('active');});var t=document.getElementById('step'+n);if(t)t.classList.add('active');for(var i=1;i<=3;i++){var c=document.getElementById('sc'+i),l=document.getElementById('sl'+i);c.classList.remove('active','done');l.classList.remove('active');c.removeAttribute('aria-current');if(i<n){c.classList.add('done');c.textContent='✓';}else if(i===n){c.classList.add('active');c.setAttribute('aria-current','step');c.textContent=i;l.classList.add('active');}else{c.textContent=i;}}for(var j=1;j<=2;j++){document.getElementById('conn'+j).classList.toggle('done',n>j);}document.getElementById('stepProgress').setAttribute('aria-valuenow',n);if(window.innerWidth<640){document.getElementById('apply').scrollIntoView({behavior:'smooth',block:'start'});}}
 function showError(id,msg){var el=document.getElementById(id);if(!el)return;el.textContent=msg;el.classList.add('show');}
 function clearError(id){var el=document.getElementById(id);if(!el)return;el.textContent='';el.classList.remove('show');}
 function markInvalid(fid,invalid){var el=document.getElementById(fid);if(!el)return;if(invalid)el.classList.add('invalid');else el.classList.remove('invalid');}
-
-function validateStep(step){
-  var ok=true;
-  if(step===1){
-    var name=document.getElementById('f_name').value.trim(),dob=document.getElementById('f_dob').value,gender=document.getElementById('f_gender').value,email=document.getElementById('f_email').value.trim(),phone=document.getElementById('f_phone').value.trim(),city=document.getElementById('f_city').value.trim(),state=document.getElementById('f_state').value;
-    if(!name||name.length<2){showError('err_name','Please enter your full name (min 2 characters).');markInvalid('f_name',true);ok=false;}else{clearError('err_name');markInvalid('f_name',false);}
-    if(!dob){showError('err_dob','Please select your date of birth.');markInvalid('f_dob',true);ok=false;}else{var bYear=new Date(dob).getFullYear(),curYear=new Date().getFullYear();if(curYear-bYear<14||curYear-bYear>60){showError('err_dob','Please enter a valid date of birth.');markInvalid('f_dob',true);ok=false;}else{clearError('err_dob');markInvalid('f_dob',false);}}
-    if(!gender){showError('err_gender','Please select your gender.');markInvalid('f_gender',true);ok=false;}else{clearError('err_gender');markInvalid('f_gender',false);}
-    var emailRE=/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
-    if(!emailRE.test(email)){showError('err_email','Please enter a valid email address.');markInvalid('f_email',true);ok=false;}else{clearError('err_email');markInvalid('f_email',false);}
-    var digits=phone.replace(/[\s\-\+\(\)]/g,'');
-    if(!digits||digits.length<7||digits.length>15||!/^\d+$/.test(digits)){showError('err_phone','Please enter a valid mobile number.');markInvalid('f_phone',true);ok=false;}else{clearError('err_phone');markInvalid('f_phone',false);}
-    if(!city||city.length<2){showError('err_city','Please enter your city / town.');markInvalid('f_city',true);ok=false;}else{clearError('err_city');markInvalid('f_city',false);}
-    if(!state){showError('err_state','Please select your state.');markInvalid('f_state',true);ok=false;}else{clearError('err_state');markInvalid('f_state',false);}
-  }
-  if(step===2){
-    var prog=document.getElementById('f_program').value,qual=document.getElementById('f_qual').value,year=document.getElementById('f_year').value;
-    if(!prog){showError('err_program','Please select a program.');markInvalid('f_program',true);ok=false;}else{clearError('err_program');markInvalid('f_program',false);}
-    if(!qual){showError('err_qual','Please select your highest qualification.');markInvalid('f_qual',true);ok=false;}else{clearError('err_qual');markInvalid('f_qual',false);}
-    if(!year){showError('err_year','Please select your pass year.');markInvalid('f_year',true);ok=false;}else{clearError('err_year');markInvalid('f_year',false);}
-  }
-  return ok;
-}
-
+function validateStep(step){var ok=true;if(step===1){var name=document.getElementById('f_name').value.trim(),dob=document.getElementById('f_dob').value,gender=document.getElementById('f_gender').value,email=document.getElementById('f_email').value.trim(),phone=document.getElementById('f_phone').value.trim(),city=document.getElementById('f_city').value.trim(),state=document.getElementById('f_state').value;if(!name||name.length<2){showError('err_name','Please enter your full name (min 2 characters).');markInvalid('f_name',true);ok=false;}else{clearError('err_name');markInvalid('f_name',false);}if(!dob){showError('err_dob','Please select your date of birth.');markInvalid('f_dob',true);ok=false;}else{var bYear=new Date(dob).getFullYear(),curYear=new Date().getFullYear();if(curYear-bYear<14||curYear-bYear>60){showError('err_dob','Please enter a valid date of birth.');markInvalid('f_dob',true);ok=false;}else{clearError('err_dob');markInvalid('f_dob',false);}}if(!gender){showError('err_gender','Please select your gender.');markInvalid('f_gender',true);ok=false;}else{clearError('err_gender');markInvalid('f_gender',false);}var emailRE=/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;if(!emailRE.test(email)){showError('err_email','Please enter a valid email address.');markInvalid('f_email',true);ok=false;}else{clearError('err_email');markInvalid('f_email',false);}var digits=phone.replace(/[\s\-\+\(\)]/g,'');if(!digits||digits.length<7||digits.length>15||!/^\d+$/.test(digits)){showError('err_phone','Please enter a valid mobile number.');markInvalid('f_phone',true);ok=false;}else{clearError('err_phone');markInvalid('f_phone',false);}if(!city||city.length<2){showError('err_city','Please enter your city / town.');markInvalid('f_city',true);ok=false;}else{clearError('err_city');markInvalid('f_city',false);}if(!state){showError('err_state','Please select your state.');markInvalid('f_state',true);ok=false;}else{clearError('err_state');markInvalid('f_state',false);}}if(step===2){var prog=document.getElementById('f_program').value,qual=document.getElementById('f_qual').value,year=document.getElementById('f_year').value;if(!prog){showError('err_program','Please select a program.');markInvalid('f_program',true);ok=false;}else{clearError('err_program');markInvalid('f_program',false);}if(!qual){showError('err_qual','Please select your highest qualification.');markInvalid('f_qual',true);ok=false;}else{clearError('err_qual');markInvalid('f_qual',false);}if(!year){showError('err_year','Please select your pass year.');markInvalid('f_year',true);ok=false;}else{clearError('err_year');markInvalid('f_year',false);}}return ok;}
 function nextStep(from){if(!validateStep(from))return;if(from===2)populateReview();setStep(from+1);}
 function prevStep(from){setStep(from-1);}
-function populateReview(){
-  var city=sanitize(document.getElementById('f_city').value),state=sanitize(document.getElementById('f_state').value);
-  document.getElementById('rv_name').textContent=sanitize(document.getElementById('f_name').value);
-  document.getElementById('rv_dob').textContent=sanitize(document.getElementById('f_dob').value);
-  document.getElementById('rv_gender').textContent=sanitize(document.getElementById('f_gender').value);
-  document.getElementById('rv_email').textContent=sanitize(document.getElementById('f_email').value);
-  document.getElementById('rv_phone').textContent=sanitize(document.getElementById('f_phone').value);
-  document.getElementById('rv_location').textContent=city+(state?', '+state:'');
-  document.getElementById('rv_program').textContent=sanitize(document.getElementById('f_program').value);
-  document.getElementById('rv_qual').textContent=sanitize(document.getElementById('f_qual').value);
-  document.getElementById('rv_year').textContent=sanitize(document.getElementById('f_year').value);
-  document.getElementById('rv_stream').textContent=sanitize(document.getElementById('f_stream').value)||'—';
-  document.getElementById('rv_percent').textContent=sanitize(document.getElementById('f_percent').value)||'—';
-}
+function populateReview(){var city=sanitize(document.getElementById('f_city').value),state=sanitize(document.getElementById('f_state').value);document.getElementById('rv_name').textContent=sanitize(document.getElementById('f_name').value);document.getElementById('rv_dob').textContent=sanitize(document.getElementById('f_dob').value);document.getElementById('rv_gender').textContent=sanitize(document.getElementById('f_gender').value);document.getElementById('rv_email').textContent=sanitize(document.getElementById('f_email').value);document.getElementById('rv_phone').textContent=sanitize(document.getElementById('f_phone').value);document.getElementById('rv_location').textContent=city+(state?', '+state:'');document.getElementById('rv_program').textContent=sanitize(document.getElementById('f_program').value);document.getElementById('rv_qual').textContent=sanitize(document.getElementById('f_qual').value);document.getElementById('rv_year').textContent=sanitize(document.getElementById('f_year').value);document.getElementById('rv_stream').textContent=sanitize(document.getElementById('f_stream').value)||'—';document.getElementById('rv_percent').textContent=sanitize(document.getElementById('f_percent').value)||'—';}
 function setNote(msg,type){var el=document.getElementById('emailConfirmNote');el.textContent=msg;el.className='email-note '+type;}
-
-/* CAROUSEL DOTS */
 (function(){var dotEls=[document.getElementById('dot0'),document.getElementById('dot1')],idx=0;setInterval(function(){dotEls[idx].classList.remove('active');idx=(idx+1)%2;dotEls[idx].classList.add('active');},11000);})();
-
-/* LIGHTBOX */
-function openLightbox(src,alt){
-  var lb=document.getElementById('lightbox'),img=document.getElementById('lightboxImg');
-  img.src=src;img.alt=alt||'Gallery image';
-  lb.classList.add('open');document.body.style.overflow='hidden';lb.focus();
-}
-function closeLightbox(evt){
-  if(evt&&evt.target!==document.getElementById('lightbox')&&!evt.target.classList.contains('lightbox-close'))return;
-  document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';
-}
+function openLightbox(src,alt){var lb=document.getElementById('lightbox'),img=document.getElementById('lightboxImg');img.src=src;img.alt=alt||'Gallery image';lb.classList.add('open');document.body.style.overflow='hidden';lb.focus();}
+function closeLightbox(evt){if(evt&&evt.target!==document.getElementById('lightbox')&&!evt.target.classList.contains('lightbox-close'))return;document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
-
-/* SUBMIT */
 var FORMSPREE_URL='https://formspree.io/f/xnjldypb';
 var _submitting=false;
-
-async function submitForm(){
-  if(_submitting)return;
-  var btn=document.getElementById('submitBtn'),refCode=genRef(),now=new Date();
-  var fields={
-    reference_number:refCode,full_name:sanitize(document.getElementById('f_name').value),dob:sanitize(document.getElementById('f_dob').value),
-    gender:sanitize(document.getElementById('f_gender').value),email:sanitize(document.getElementById('f_email').value),
-    mobile:sanitize(document.getElementById('f_phone').value),whatsapp:sanitize(document.getElementById('f_wphone').value)||'Same as mobile',
-    city:sanitize(document.getElementById('f_city').value),state:sanitize(document.getElementById('f_state').value),
-    program:sanitize(document.getElementById('f_program').value),qualification:sanitize(document.getElementById('f_qual').value),
-    pass_year:sanitize(document.getElementById('f_year').value),board:sanitize(document.getElementById('f_board').value)||'Not specified',
-    percentage:sanitize(document.getElementById('f_percent').value)||'Not specified',stream:sanitize(document.getElementById('f_stream').value)||'Not specified',
-    entrance_score:sanitize(document.getElementById('f_entrance').value)||'Not specified',source:sanitize(document.getElementById('f_source').value)||'Not specified',
-    message:sanitize(document.getElementById('f_message').value)||'No message',
-    submitted_at:now.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short'})
-  };
-  _submitting=true;btn.disabled=true;btn.textContent='Submitting…';
-  try{var res=await fetch(FORMSPREE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(fields)});if(!res.ok)console.warn('Formspree:',res.status);}catch(err){console.error('Formspree error:',err);}
-  document.getElementById('stepProgress').style.display='none';
-  document.querySelectorAll('.form-step').forEach(function(s){s.style.display='none';});
-  document.getElementById('formSuccess').classList.add('show');
-  document.getElementById('refNo').textContent='Reference No: '+refCode;
-  setNote('Sending confirmation email…','warn');
-  var adminPayload={name:fields.full_name,email:fields.email,title:fields.program+' — Admission Enquiry',time:fields.submitted_at,message:'=== ADMISSION APPLICATION ===\n\nReference  : '+refCode+'\nFull Name  : '+fields.full_name+'\nDOB        : '+fields.dob+'\nGender     : '+fields.gender+'\nMobile     : '+fields.mobile+'\nWhatsApp   : '+fields.whatsapp+'\nEmail      : '+fields.email+'\nCity/State : '+fields.city+', '+fields.state+'\n\n--- ACADEMIC ---\nProgram    : '+fields.program+'\nQual       : '+fields.qualification+'\nPass Year  : '+fields.pass_year+'\nBoard      : '+fields.board+'\nStream     : '+fields.stream+'\nPercentage : '+fields.percentage+'\nEntrance   : '+fields.entrance_score+'\nSource     : '+fields.source+'\n\n--- MESSAGE ---\n'+fields.message+'\n\nContact applicant within 24–48 hrs.\nStarex University Admissions 2026–27'};
-  var applicantPayload={applicant_name:fields.full_name,applicant_email:fields.email,program:fields.program,ref_no:refCode,submitted_at:fields.submitted_at,to_name:fields.full_name,to_email:fields.email,name:fields.full_name,email:fields.email,from_name:'Starex University Admissions',reply_to:'starexuniversityofficial@gmail.com',message:'Thank you for applying to Starex University!\n\nReference No: '+refCode+'\nProgram: '+fields.program+'\n\nOur admissions team will contact you within 24–48 hours.\nFor queries, call +91-73311-12501 or email starexuniversityofficial@gmail.com.\n\nVisit: https://starexofficial.university\n\n— Starex University Admissions Team'};
-  var adminOk=false,applicantOk=false;
-  try{await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ADMIN,adminPayload);adminOk=true;}catch(err){console.error('Admin email error:',err);}
-  try{await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_APPLICANT,applicantPayload);applicantOk=true;}catch(err){console.error('Applicant email error:',err&&(err.text||err.message));}
-  if(applicantOk){setNote('✅ Confirmation email sent to '+fields.email,'ok');}
-  else if(adminOk){setNote('⚠️ Admin notified. Applicant confirmation email could not be sent. Please check your inbox or contact us directly.','warn');}
-  else{setNote('⚠️ Emails could not be sent. Your application data has been saved. Please contact us if needed.','err');}
-}
+async function submitForm(){if(_submitting)return;var btn=document.getElementById('submitBtn'),refCode=genRef(),now=new Date();var fields={reference_number:refCode,full_name:sanitize(document.getElementById('f_name').value),dob:sanitize(document.getElementById('f_dob').value),gender:sanitize(document.getElementById('f_gender').value),email:sanitize(document.getElementById('f_email').value),mobile:sanitize(document.getElementById('f_phone').value),whatsapp:sanitize(document.getElementById('f_wphone').value)||'Same as mobile',city:sanitize(document.getElementById('f_city').value),state:sanitize(document.getElementById('f_state').value),program:sanitize(document.getElementById('f_program').value),qualification:sanitize(document.getElementById('f_qual').value),pass_year:sanitize(document.getElementById('f_year').value),board:sanitize(document.getElementById('f_board').value)||'Not specified',percentage:sanitize(document.getElementById('f_percent').value)||'Not specified',stream:sanitize(document.getElementById('f_stream').value)||'Not specified',entrance_score:sanitize(document.getElementById('f_entrance').value)||'Not specified',source:sanitize(document.getElementById('f_source').value)||'Not specified',message:sanitize(document.getElementById('f_message').value)||'No message',submitted_at:now.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short'})};_submitting=true;btn.disabled=true;btn.textContent='Submitting…';try{var res=await fetch(FORMSPREE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(fields)});if(!res.ok)console.warn('Formspree:',res.status);}catch(err){console.error('Formspree error:',err);}document.getElementById('stepProgress').style.display='none';document.querySelectorAll('.form-step').forEach(function(s){s.style.display='none';});document.getElementById('formSuccess').classList.add('show');document.getElementById('refNo').textContent='Reference No: '+refCode;setNote('Sending confirmation email…','warn');var adminPayload={name:fields.full_name,email:fields.email,title:fields.program+' — Admission Enquiry',time:fields.submitted_at,message:'=== ADMISSION APPLICATION ===\n\nReference  : '+refCode+'\nFull Name  : '+fields.full_name+'\nDOB        : '+fields.dob+'\nGender     : '+fields.gender+'\nMobile     : '+fields.mobile+'\nWhatsApp   : '+fields.whatsapp+'\nEmail      : '+fields.email+'\nCity/State : '+fields.city+', '+fields.state+'\n\n--- ACADEMIC ---\nProgram    : '+fields.program+'\nQual       : '+fields.qualification+'\nPass Year  : '+fields.pass_year+'\nBoard      : '+fields.board+'\nStream     : '+fields.stream+'\nPercentage : '+fields.percentage+'\nEntrance   : '+fields.entrance_score+'\nSource     : '+fields.source+'\n\n--- MESSAGE ---\n'+fields.message+'\n\nContact applicant within 24–48 hrs.\nStarex University Admissions 2026–27'};var applicantPayload={applicant_name:fields.full_name,applicant_email:fields.email,program:fields.program,ref_no:refCode,submitted_at:fields.submitted_at,to_name:fields.full_name,to_email:fields.email,name:fields.full_name,email:fields.email,from_name:'Starex University Admissions',reply_to:'starexuniversityofficial@gmail.com',message:'Thank you for applying to Starex University!\n\nReference No: '+refCode+'\nProgram: '+fields.program+'\n\nOur admissions team will contact you within 24–48 hours.\nFor queries, call +91-73311-12501 or email starexuniversityofficial@gmail.com.\n\nVisit: https://starexofficial.university\n\n— Starex University Admissions Team'};var adminOk=false,applicantOk=false;try{await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ADMIN,adminPayload);adminOk=true;}catch(err){console.error('Admin email error:',err);}try{await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_APPLICANT,applicantPayload);applicantOk=true;}catch(err){console.error('Applicant email error:',err&&(err.text||err.message));}if(applicantOk){setNote('✅ Confirmation email sent to '+fields.email,'ok');}else if(adminOk){setNote('⚠️ Admin notified. Applicant confirmation email could not be sent. Please check your inbox or contact us directly.','warn');}else{setNote('⚠️ Emails could not be sent. Your application data has been saved. Please contact us if needed.','err');}}
 </script>
 </body>
 </html>
